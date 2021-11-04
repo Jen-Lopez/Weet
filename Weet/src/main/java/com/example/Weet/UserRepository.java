@@ -9,5 +9,4 @@ public interface UserRepository extends MongoRepository<User, String> {
     public List<User> findByLastName(String lastName);
     public List<User> findByusername(String username);
 
-
 }
