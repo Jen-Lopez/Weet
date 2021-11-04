@@ -18,6 +18,9 @@ Weet is a Spring Boot application that will allow individuals with dietary restr
 - MongoDB
 
 ## Tools
-- [Confluence]()
+- [Confluence](https://weet-app.atlassian.net/wiki/spaces/WEET/overview)
 - [Trello Board](https://trello.com/b/QTIius7p/team-weet)
 - Slack **#team-weet**
+
+## Setup
+Check out our [setup guide](./SETUP.md) for instructions on how to run the project
