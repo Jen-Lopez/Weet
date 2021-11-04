@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head> 
+        <title>Restaurant Search</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <h1>Restaurant Search</h1>
+        <form action="#" th:action="@{/getRestaurants}" method="get">
+            <label for="zip">Enter your Zip Code</label><br>
+            <input type="city" id="zipcode" name="zip" placeholder="10010"><br>
+            <button type="submit">Search</button>
+        </form>
+    </body>
+</html>
+

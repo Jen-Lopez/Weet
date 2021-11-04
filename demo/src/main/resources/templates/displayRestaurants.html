@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Restaurant Results</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+
+    <body>
+        <h1>Restaurant Results</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Cuisine</th>
+                <th>Address</th>
+                <th>Description</th>
+            </tr>
+            <tr th:each="rest : ${results}">
+                <td th:text="${rest.getRestName()}"></td>
+                <td th:text="${rest.getRestCuisine()}"></td>
+                <td th:text="${rest.getRestAddress()}"></td>
+                <td th:text="${rest.getRestDescription()}"></td>
+            </tr>
+        </table>
+    </body>
+</html>
