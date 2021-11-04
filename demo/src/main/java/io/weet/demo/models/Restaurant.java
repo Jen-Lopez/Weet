@@ -1,11 +1,14 @@
 package io.weet.demo.models;
 
+import java.util.ArrayList;
+
 public class Restaurant {
     private String id;
     private String name;
     private String description;
     private String address;
     private String cuisine; 
+    private ArrayList<Dish> menuItems = new ArrayList<>();
     
     public String getRestId() {
         return id;

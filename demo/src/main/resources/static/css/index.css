@@ -1,0 +1,40 @@
+/* Restaurant Search */
+
+#filter-options {
+    margin-top: 50px;
+}
+
+#filter-options .dropdown {
+    margin-right: 12px;
+}
+
+#filter-options .dropdown .btn {
+    background-color: #639977;
+    color: white;
+}
+
+#filter-options .dropdown .btn:hover  {
+    background-color: #598b6b;
+}
+
+#filter-options .dropdown-item {
+    padding: 0;
+    margin: auto;
+}
+
+#zip-filter, #borough-filter {
+    margin: 30px 10px;
+}
+
+#or-div {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.rest-img {
+    height: 100%;
+}
+
+.star-rate {
+    width: 80%;
+}

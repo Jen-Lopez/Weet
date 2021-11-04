@@ -16,19 +16,22 @@ public class OpenMenuService {
     private String API_KEY;
     private List<Restaurant> restaurants = new ArrayList<>();
 
-    public List<Restaurant> getResults(String zip) {
-        try {
-            fetchRestaurants(zip);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
+    public List<Restaurant> getResults() {
         return restaurants;
     }
 
-    public void fetchRestaurants(String zip) throws IOException, InterruptedException {
-        List <Restaurant> newRestaurants = new ArrayList<>();
+    public void fetchRestaurantsWrapper(String zip, String city) {
+        try {
+            fetchRestaurants(zip, city);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-        String LOCATION_ENDPOINT = String.format("https://openmenu.com/api/v2/location.php?key=%s&postal_code=%s&city=%s&country=%s", API_KEY, zip ,"", "US");
+    public void fetchRestaurants(String zip, String city) throws IOException, InterruptedException {
+        List <Restaurant> newRestaurants = new ArrayList<>();
+        System.out.println("INN HEREEEE YURR");
+        String LOCATION_ENDPOINT = String.format("https://openmenu.com/api/v2/location.php?key=%s&postal_code=%s&city=%s&state=%s&country=%s", API_KEY, zip, city, "NY", "US");
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(LOCATION_ENDPOINT))
@@ -53,7 +56,20 @@ public class OpenMenuService {
             this.restaurants = newRestaurants;
     }
 
-    public void fetchRestaurantDetails(String restId) {
 
+    public List<Restaurant> getDetails(String id) {
+        return null;
     }
+
+    /* public void fetchRestaurantDetails(String id) throws IOException, InterruptedException {
+        String RESTAURANT_ENDPOINT = String.format("https://openmenu.com/api/v2/restaurant.php?key=%s&id=%s", API_KEY, id);
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(RESTAURANT_ENDPOINT))
+            .GET()
+            .build();
+
+            HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println(httpResponse.body());
+    } */
 }
