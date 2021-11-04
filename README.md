@@ -15,6 +15,8 @@ Weet is a Spring Boot application that will allow individuals with dietary restr
 
 ## Tech Stack
 - Spring Boot (Java Backend)
+- ThymeLeaf
+- Bootstrap
 - MongoDB
 
 ## Tools
