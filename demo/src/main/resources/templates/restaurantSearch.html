@@ -53,8 +53,11 @@
             </section>
             <section th:switch="${#lists.size(results)}">
                 <div th:case="'0'" class="text-center p-5">No Restaurants Yet!</div>
-                <div  th:case="*" th:replace ="fragments/restaurantResults::restResults(results=${results})"></div>
+                <div th:case="*">
+                    <div th:replace ="fragments/restaurantResults::restResults(results=${results})"></div>
+                </div>
             </section>
         </main>
+        <script type="text/javascript" th:src="@{js/index.js}"></script>
     </body>
 </html>
