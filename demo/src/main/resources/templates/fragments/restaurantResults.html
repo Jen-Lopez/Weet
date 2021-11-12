@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+    <body th:fragment="restResults(results)">
+        <div class="container d-flex" style="margin-top: 50px;">
+            <div id = "card-container">
+                <div class="card mb-3 mx-auto" style="max-width: 700px;" th:each="rest : ${results}" th:attr="onclick=|redirectToDetails('${rest.getRestId()}')|" >
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img th:src="@{images/rest-placeholder.jpeg}" class="img-fluid rounded-start rest-img" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${rest.getRestName()}"></h5>
+                                <p class="card-text"><small class="text-muted" th:text="${rest.getRestAddress()}"></small></p>
+                                <p class="card-text" th:text="${rest.getRestDescription()}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id = "map-container" class="flex-grow-1 text-center">
+                <h1>Google Maps</h1>
+                <img th:src="@{images/map-placeholder.png}" alt="...">
+            </div>
+        </div>
+    </body>
+</html>
