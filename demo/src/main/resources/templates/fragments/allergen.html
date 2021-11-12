@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+    <body th:fragment="allergenList(allergens)">
+        <div class="container">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Allergens</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="all:${allergens}">
+                        <td th:text="${all.getAllergen()}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container text-center" style="margin-top: 2%;">
+            <button type="submit" class="btn btn-success">Add Allergen</button>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,19 +1,16 @@
 package io.weet.demo.controllers;
-import io.weet.demo.services.OpenMenuService;
+import io.weet.demo.models.Allergen;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-//@RequestMapping("/allergen")
-public class AllergenController {
+
+public class UserProfileController {
     private List<Allergen> listAllergens;
 
     @PostConstruct
@@ -32,11 +29,11 @@ public class AllergenController {
         listAllergens.add(emp5);
 
     }
-    @GetMapping("/list")
-    public String showAllergens(Model model){
-        model.addAttribute("allergens", listAllergens);
-        return "Allergen";
+
+    @GetMapping("/user")
+    public String userProfile(Model model) {
+        model.addAttribute("allergenList", listAllergens);
+        return "userProfile";
     }
-   
 
 }
