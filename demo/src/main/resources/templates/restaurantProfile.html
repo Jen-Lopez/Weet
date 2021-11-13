@@ -2,20 +2,25 @@
 <html xmlns:th="https://www.thymeleaf.org">
     <head th:replace ="fragments/head::head"></head>
     <body>
-        <div th:replace ="fragments/navigator::nav"></div>
-        <main style="margin-top: 100px;">
-            <div>
-                <h1 class="display-3 text-center" th:text="${restaurant.getRestName()}"></h1>
-                <p th:text="${restaurant.getRestDescription()}"></p>
-                <p th:text="${restaurant.getRestAddress()}"></p>
-            </div>
-            <div>
-                <div th:each="menuItem : ${restaurant.getMenuItems()}">
-                    <p th:text="${menuItem.getItemName()}"></p>
-                    <p th:text="${menuItem.getItemDescription()}"></p>
+        <div class="wrapper">
+            <div th:replace ="fragments/navigator::nav"></div>
+            <main th:if="${restaurant == null}">
+                <h1 class="text-center">Error. Nothing here to show.</h1>
+            </main>
+            <main th:unless="${restaurant == null}" style="margin-top: 100px;">
+                <div>
+                    <h1 class="display-3 text-center" th:text="${restaurant.getRestName()}"></h1>
+                    <p th:text="${restaurant.getRestDescription()}"></p>
+                    <p th:text="${restaurant.getRestAddress()}"></p>
                 </div>
-            </div>
-        </main>
+                <div>
+                    <div th:each="menuItem : ${restaurant.getMenuItems()}">
+                        <p th:text="${menuItem.getItemName()}"></p>
+                        <p th:text="${menuItem.getItemDescription()}"></p>
+                    </div>
+                </div>
+            </main>
+        </div>
         <div th:replace ="fragments/footer::footer"></div>
     </body>
 </html>

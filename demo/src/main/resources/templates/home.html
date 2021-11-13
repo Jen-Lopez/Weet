@@ -2,48 +2,51 @@
 <html xmlns:th="https://www.thymeleaf.org">
     <head th:replace ="fragments/head::head"></head>
     <body>
-        <div th:replace ="fragments/navigator::nav"></div>
-        <main>
-            <div class="container text-center" style="margin-top: 5%; margin-bottom: 2%;">
-                <h1 class="display-1">WEET</h1>
-                <p class="lead">some tagline</p>
-            </div>
+        <div class="wrapper">
+            <div th:replace ="fragments/navigator::nav"></div>
+            <main>
+                <div class="container text-center" style="margin-top: 5%; margin-bottom: 2%;">
+                    <h1 class="display-1">WEET</h1>
+                    <p class="lead">some tagline</p>
+                </div>
 
-            <div class="container row row-cols-1 row-cols-md-3 g-4 mx-auto">
-                <div class="col">
-                <div class="card h-100">
-                    <img th:src="@{images/img-placeholder.jpeg}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title text-center">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-                </div>
-                <div class="col">
-                <div class="card h-100">
-                    <img th:src="@{images/img-placeholder.jpeg}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title text-center">Card title</h5>
-                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                </div>
-                </div>
-                <div class="col">
+                <div class="container row row-cols-1 row-cols-md-3 g-4 mx-auto">
+                    <div class="col">
                     <div class="card h-100">
-                    <img th:src="@{images/img-placeholder.jpeg}" class="card-img-top" alt="...">
-                    <div class="card-body">
+                        <img th:src="@{images/img-placeholder.jpeg}" class="card-img-top" alt="...">
+                        <div class="card-body">
                         <h5 class="card-title text-center">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        </div>
                     </div>
+                    </div>
+                    <div class="col">
+                    <div class="card h-100">
+                        <img th:src="@{images/img-placeholder.jpeg}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title text-center">Card title</h5>
+                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                        <img th:src="@{images/img-placeholder.jpeg}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                        </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="container text-center">
-                <a href="/search">
-                    <button type="button" class="btn btn-outline-info" style="margin: 50px 0;">Get Started</button>
-                </a>
-            </div>
-        </main>
+                <div class="container text-center">
+                    <a href="/search">
+                        <button type="button" class="btn btn-outline-info" style="margin: 50px 0;">Get Started</button>
+                    </a>
+                </div>
+            </main>
+        </div>
+        <div th:replace ="fragments/footer::footer"></div>
     </body>
 </html>

@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import io.weet.demo.models.Restaurant;
 import io.weet.demo.services.OpenMenuService;
 
 @Controller
@@ -12,13 +13,20 @@ public class RestaurantDetailsController {
     
     @Autowired
     OpenMenuService openMenuService;
-    
+
+    Restaurant rest; 
+
     @GetMapping("/restaurant")
-    public String fetchRestDetails(@RequestParam("id") String restId, Model model) {
-        if (!restId.isEmpty()) {
-            System.out.println(openMenuService.getRestaurantDetails(restId));
-            model.addAttribute("restaurant", openMenuService.getRestaurantDetails(restId));
+    public String RestaurantSearch(Model model) {
+        if (rest != null) {
+            model.addAttribute("restaurant", rest);
         }
         return "restaurantProfile";
+    }
+
+    @GetMapping("/getRestaurant")
+    public String fetchRestDetails(@RequestParam("id") String restId, Model model) {
+        rest = openMenuService.getRestaurantDetails(restId);
+        return "redirect:/restaurant";
     }
 }

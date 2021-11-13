@@ -50,10 +50,21 @@
 
 
 footer {
-    position: relative;
+
     height: 100px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     color: grey;
 }
+.wrapper {
+    min-height: 100vh;
+}
+
+/* .wrapper {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+} */

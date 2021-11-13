@@ -3,7 +3,7 @@ const loaderImg = document.getElementById("spinner");
 const results = document.getElementById("results");
 
 const redirectToDetails = (id) => {
-    window.location.href=`/restaurant?id=${id}`
+    window.location.href=`/getRestaurant?id=${id}`
 }
 
 const loader = () => {
