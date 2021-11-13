@@ -47,3 +47,13 @@
 #spinner {
     display: none;
 }
+
+
+footer {
+    position: relative;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: grey;
+}

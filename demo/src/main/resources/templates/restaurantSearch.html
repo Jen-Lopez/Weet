@@ -4,7 +4,7 @@
     <body>
         <div th:replace ="fragments/navigator::nav"></div>
         <main style="margin-top: 100px;">
-            <h1 class="display-4 text-center">Restaurant Search</h1>
+            <h1 class="display-3 text-center">Restaurant Search</h1>
             <section id = "filter-options" class="container">
                 <form id = "search" class="d-flex"  th:action="@{/getRestaurants/}" method="get">
                     <div class="dropdown">
@@ -60,6 +60,7 @@
                 <div th:replace ="fragments/loading::loading"></div>
             </div>
         </main>
+        <div th:replace ="fragments/footer::footer"></div>
         <script type="text/javascript" th:src="@{js/search.js}"></script>
     </body>
 </html>

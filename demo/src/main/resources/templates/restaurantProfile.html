@@ -5,7 +5,7 @@
         <div th:replace ="fragments/navigator::nav"></div>
         <main style="margin-top: 100px;">
             <div>
-                <h1 class="display-4 text-center" th:text="${restaurant.getRestName()}"></h1>
+                <h1 class="display-3 text-center" th:text="${restaurant.getRestName()}"></h1>
                 <p th:text="${restaurant.getRestDescription()}"></p>
                 <p th:text="${restaurant.getRestAddress()}"></p>
             </div>
@@ -16,5 +16,6 @@
                 </div>
             </div>
         </main>
+        <div th:replace ="fragments/footer::footer"></div>
     </body>
 </html>
