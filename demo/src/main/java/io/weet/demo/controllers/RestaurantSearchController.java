@@ -3,6 +3,7 @@ package io.weet.demo.controllers;
 import io.weet.demo.models.Restaurant;
 import io.weet.demo.services.OpenMenuService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class RestaurantSearchController {
 
     @GetMapping("/search")
     public String RestaurantSearch(Model model) {
-        List<Restaurant> results = openMenuService.getResults();
+        List<Restaurant> results = new ArrayList<>(openMenuService.getResults().values());
         model.addAttribute("results", results);
         return "restaurantSearch";
     }

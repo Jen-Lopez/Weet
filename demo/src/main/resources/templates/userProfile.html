@@ -2,12 +2,15 @@
 <html xmlns:th="https://www.thymeleaf.org">
     <head th:replace ="fragments/head::head"></head>
     <body>
-        <div th:replace ="fragments/navigator::nav"></div>
-        <main style="margin-top: 100px;">
-            <div>
-                <h1 class="display-4 text-center"> User Profile</h1>
-                <div th:replace ="fragments/allergen::allergenList(allergens=${allergenList})"></div>
-            </div>
-        </main>
+        <div class="wrapper">
+            <div th:replace ="fragments/navigator::nav"></div>
+            <main style="margin-top: 100px;">
+                <div>
+                    <h1 class="display-3 text-center"> User Profile </h1>
+                    <div th:replace ="fragments/allergen::allergenList(allergens=${allergenList})"></div>
+                </div>
+            </main>
+        </div>
+        <div th:replace ="fragments/footer::footer"></div>
     </body>
 </html>

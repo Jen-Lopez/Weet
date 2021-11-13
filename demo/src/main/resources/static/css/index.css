@@ -1,5 +1,9 @@
 /* Restaurant Search */
 
+.wrapper {
+    min-height: 100vh;
+}
+
 #filter-options {
     margin-top: 50px;
 }
@@ -31,10 +35,59 @@
     font-weight: 300;
 }
 
+#card-container {
+    height: 100vh;
+    overflow: auto;
+}
+
 .rest-img {
     height: 100%;
 }
 
 .star-rate {
     width: 80%;
+}
+
+#spinner {
+    display: none;
+}
+
+#restDetails a {
+    color: #5a7877!important;
+    text-decoration: none!important;
+}
+
+#restDetails a:hover {
+    text-decoration: underline!important;
+}
+#menu-items {
+    margin: 50px 0;
+}
+
+#menu-items h1 {
+    margin-bottom: 50px;
+}
+
+#menu-items .card-text {
+    margin-bottom: 100px;
+}
+
+#menu-items .btn {
+    position: absolute;
+    bottom: 20px;
+}
+
+footer {
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: grey;
+}
+
+@media screen and (max-width: 600px) {
+    #menu-items-list {
+        padding: 5%;
+    }
 }
