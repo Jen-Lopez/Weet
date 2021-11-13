@@ -21,6 +21,7 @@ public class RestaurantDetailsController {
         if (rest != null) {
             model.addAttribute("restaurant", rest);
         }
+        rest = null;
         return "restaurantProfile";
     }
 

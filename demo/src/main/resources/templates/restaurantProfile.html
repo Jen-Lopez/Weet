@@ -4,20 +4,70 @@
     <body>
         <div class="wrapper">
             <div th:replace ="fragments/navigator::nav"></div>
-            <main th:if="${restaurant == null}">
+            <main class="container" th:if="${restaurant == null}">
                 <h1 class="text-center">Error. Nothing here to show.</h1>
             </main>
-            <main th:unless="${restaurant == null}" style="margin-top: 100px;">
-                <div>
-                    <h1 class="display-3 text-center" th:text="${restaurant.getRestName()}"></h1>
-                    <p th:text="${restaurant.getRestDescription()}"></p>
-                    <p th:text="${restaurant.getRestAddress()}"></p>
-                </div>
-                <div>
-                    <div th:each="menuItem : ${restaurant.getMenuItems()}">
-                        <p th:text="${menuItem.getItemName()}"></p>
-                        <p th:text="${menuItem.getItemDescription()}"></p>
+            <main class="container" th:unless="${restaurant == null}" style="margin-top: 100px;">
+                <div  id ="restDetails" class="d-flex">
+                    <div style="padding-right: 20px;">
+                        <h1 class="display-3 text-center" th:text="${restaurant.getRestName()}"></h1>
+                        <p class="lead text-center" th:if="${restaurant.getRestCuisine() != null}" th:text="${restaurant.getRestCuisine()}"></p>
+                        <p  style="margin-top: 30px;">
+                            <span class="fw-bold">Description:</span>
+                            <span th:text="${restaurant.getRestDescription()}"></span>
+                        </p>
+                        <p>
+                            <span class="fw-bold">Address:</span>
+                            <span th:text="${restaurant.getRestAddress()}"></span>
+                            <span>(<a th:href="'https://www.google.com/maps/place/'+${restaurant.getRestAddress()}" target="_blank">Directions</a>)</span>
+                        </p>
+                        <p>
+                            <span class="fw-bold">Website:</span>
+                            <span th:if="${restaurant.getRestSite() == null}">Not Available</span>
+                            <a th:unless="${restaurant.getRestSite() == null}" th:href="${restaurant.getRestSite()}" th:text="${restaurant.getRestSite()}" target="_blank"></a>
+                        </p>
+                        <p>
+                            <span class="fw-bold">Phone:</span>
+                            <span th:if="${restaurant.getPhone() == null}">Not Available</span>
+                            <span th:unless="${restaurant.getPhone() == null}" th:text="${restaurant.getPhone()}"></span>
+                        </p>
                     </div>
+                    <div class="flex-grow-1 text-center">
+                        <img th:src="@{images/rest-placeholder.jpeg}" class="img-fluid rounded-start rest-img" alt="...">
+                    </div>
+                </div>
+                <div id="menu-items">
+                    <h1 class="display-6">Menu Items</h1>
+                    <div id= "menu-items-list" class="row row-cols-1 row-cols-md-4 g-4">
+                        <div  th:each="item:${restaurant.getMenuItems()}" class="col" >
+                          <div class="card h-100">
+                            <img th:src="@{images/food-placeholder.jpg}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${item.getItemName()}"></h5>
+                                <p class="card-text" th:text="${item.getItemDescription()}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                
+                                <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#dishModal">
+                                    View Dish Details
+                                </button>
+                                  
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="dishModal" tabindex="-1" aria-labelledby="dishModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="dishModalLabel">Item title here</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                          ...
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </div>
             </main>
         </div>
