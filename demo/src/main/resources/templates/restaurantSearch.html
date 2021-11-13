@@ -6,7 +6,7 @@
         <main style="margin-top: 100px;">
             <h1 class="display-4 text-center">Restaurant Search</h1>
             <section id = "filter-options" class="container">
-                <form class="d-flex"  th:action="@{/getRestaurants/}" method="get">
+                <form id = "search" class="d-flex"  th:action="@{/getRestaurants/}" method="get">
                     <div class="dropdown">
                         <a class="btn dropdown-toggle" href="#" role="button" id="locationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                         Location
@@ -51,13 +51,15 @@
                 </form>
 
             </section>
-            <section th:switch="${#lists.size(results)}">
-                <div th:case="'0'" class="text-center p-5">No Restaurants Yet!</div>
+            <section id = "results" th:switch="${#lists.size(results)}">
+                <div th:case="'0'" class="text-center p-5">Search for a Restaurant</div>
                 <div th:case="*">
                     <div th:replace ="fragments/restaurantResults::restResults(results=${results})"></div>
-                </div>
             </section>
+            <div id = "spinner" class="text-center">
+                <div th:replace ="fragments/loading::loading"></div>
+            </div>
         </main>
-        <script type="text/javascript" th:src="@{js/index.js}"></script>
+        <script type="text/javascript" th:src="@{js/search.js}"></script>
     </body>
 </html>
