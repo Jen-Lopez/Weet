@@ -1,18 +1,21 @@
-package com.example.Weet;
+package io.weet.demo;
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class WeetApplication implements CommandLineRunner {
+import io.weet.demo.models.User;
+import io.weet.demo.services.UserRepository;
+
+// @SpringBootApplication
+public class WeetCommandLine implements CommandLineRunner {
 
 	@Autowired
 	private UserRepository repository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(WeetApplication.class, args);
+		SpringApplication.run(WeetCommandLine.class, args);
 	}
 
 	@Override

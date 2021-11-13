@@ -1,4 +1,4 @@
-package com.example.Weet;
+package io.weet.demo.models;
 import org.springframework.data.annotation.Id;
 
 public class User {

@@ -1,6 +1,8 @@
-package com.example.Weet;
+package io.weet.demo.services;
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
+
+import io.weet.demo.models.User;
 
 public interface UserRepository extends MongoRepository<User, String> {
 
