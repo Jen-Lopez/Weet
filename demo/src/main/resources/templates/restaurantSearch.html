@@ -2,66 +2,36 @@
 <html xmlns:th="https://www.thymeleaf.org">
     <head th:replace ="fragments/head::head"></head>
     <body>
-        <div class="wrapper">
-            <div th:replace ="fragments/navigator::nav"></div>
-            <main style="margin-top: 100px;">
-                <h1 class="display-3 text-center">Restaurant Search</h1>
-                <section id = "filter-options" class="container">
-                    <form id = "search" class="d-flex"  th:action="@{/getRestaurants/}" method="get">
-                        <div class="dropdown">
-                            <a class="btn dropdown-toggle" href="#" role="button" id="locationMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Location
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="locationMenuLink">
-                                <div id = "zip-filter">
-                                    <h1 class="lead text-center">Zipcode</h1>
-                                    <li><input name="zip" class="text-center" type="text" placeholder="10010"></li>
-                                </div>
-                                <p id = "or-div" class="text-center">-- or --</p>
-                                <div id = "borough-filter">
-                                    <h1 class="lead text-center">Borough</h1>
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Select</option>
-                                        <option value="bx">Bronx</option>
-                                        <option value="bk">Brooklyn</option>
-                                        <option value="mhn">Manhattan</option>
-                                        <option value="si">Staten Island</option>
-                                        <option value="qns">Queens</option>
-                                    </select>
-                                </div>
-                            </ul>
+        <div th:replace ="fragments/navigator::nav"></div>
+        <main class="container" style="margin-top: 100px;">
+            <div class="d-flex justify-content-center">
+                <h1 class="display-3 text-center" style="margin-right: 20px;">Restaurant Search</h1> 
+                <img th:src="@{images/search-res.png}" width="80px"/>
+            </div>
+            <section id = "filter-options">
+                <form id = "search" th:action="@{/getRestaurants/}" method="get">
+                    <div class="row justify-content-center">
+                        <div class="col-md-5" >
+                            <input class="form-control me-2" type="search" name="location" placeholder='Enter street address or zip code' aria-label="Search">
                         </div>
-
-                        <div class="dropdown">
-                            <a class="btn dropdown-toggle" href="#" role="button" id="ratingMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Rating
-                            </a>
-
-                            <ul class="dropdown-menu" aria-labelledby="ratingMenuLink">
-                                <li><a class="dropdown-item" href="#"><img class = "star-rate" th:src=@{images/star-4.png}></a></li>
-                                <li><a class="dropdown-item" href="#"><img class = "star-rate" th:src=@{images/star-3.png}></a></li>
-                                <li><a class="dropdown-item" href="#"><img class = "star-rate" th:src=@{images/star-2.png}></a></li>
-                                <li><a class="dropdown-item" href="#"><img class = "star-rate" th:src=@{images/star-1.png}></a></li>
-                            </ul>
+                        <div class="col-auto">
+                            <button class="btn btn-outline-success" type="submit">Find Restaurants</button>
                         </div>
-
-                        <div class="flex-grow-1 d-flex">
-                            <input class="form-control me-2" type="search" placeholder='Search "keyword"' aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </div>
-                    </form>
-
-                </section>
-                <section id = "results" th:switch="${#lists.size(results)}">
-                    <div th:case="'0'" class="text-center p-5">Search for a Restaurant</div>
-                    <div th:case="*">
-                        <div th:replace ="fragments/restaurantResults::restResults(results=${results})"></div>
-                </section>
-                <div id = "spinner" class="text-center">
-                    <div th:replace ="fragments/loading::loading"></div>
+                    </div>
+                </form>
+            </section>
+            <section id="results">
+                <div th:if="${#lists.isEmpty(results) and processed}">
+                    <p class="text-center search-text">No Restaurants Found</p>
                 </div>
-            </main>
-        </div>
+                <div th:if="${not #lists.isEmpty(results)}">
+                    <div th:replace ="fragments/restaurantResults::restResults(results=${results})"></div>
+                </div>
+            </section>
+            <div id = "spinner" class="text-center">
+                <div th:replace ="fragments/loading::loading"></div>
+            </div>
+        </main>
         <div th:replace ="fragments/footer::footer"></div>
         <script type="text/javascript" th:src="@{js/search.js}"></script>
     </body>

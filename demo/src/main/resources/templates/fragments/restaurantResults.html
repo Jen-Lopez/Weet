@@ -5,7 +5,7 @@
             <h1 class="display-6" th:text="${'Results: '+ #lists.size(results)}"></h1>
             <div class="d-flex" style="margin: 50px 0;">
                 <div id = "card-container">
-                    <div class="card mb-3 mx-auto" style="max-width: 700px;" th:each="rest : ${results}" th:attr="onclick=|redirectToDetails('${rest.getRestId()}')|" >
+                    <div class="card mb-3 mx-auto" style="max-width: 700px;" th:each="rest : ${results}" th:attr="onclick=|redirectToDetails('${rest.getRestId()}')|">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img th:src="@{images/rest-placeholder.jpeg}" class="img-fluid rounded-start rest-img" alt="...">

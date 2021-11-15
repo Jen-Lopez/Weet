@@ -1,7 +1,7 @@
 /* Restaurant Search */
 
-.wrapper {
-    min-height: 100vh;
+#search {
+    margin-top: 80px;
 }
 
 #filter-options {
@@ -26,10 +26,6 @@
     margin: auto;
 }
 
-#zip-filter, #borough-filter {
-    margin: 30px 10px;
-}
-
 #or-div {
     font-size: 20px;
     font-weight: 300;
@@ -39,13 +35,13 @@
     height: 100vh;
     overflow: auto;
 }
+#card-container .card-body:hover {
+    background-color: #f7fffa;
+    cursor: pointer;
+}
 
 .rest-img {
     height: 100%;
-}
-
-.star-rate {
-    width: 80%;
 }
 
 #spinner {
@@ -64,7 +60,15 @@
     margin: 50px 0;
 }
 
-#menu-items h1 {
+#menu-items .sub-menu-head {
+    font-size: 22px;
+}
+
+#menu-items .menu-type-head {
+    font-size: 30px;
+}
+
+#menu-items > h1 {
     margin-bottom: 50px;
 }
 
@@ -84,6 +88,8 @@ footer {
     justify-content: center;
     align-items: center;
     color: grey;
+    position: absolute;
+    bottom: 0;
 }
 
 @media screen and (max-width: 600px) {

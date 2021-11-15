@@ -18,17 +18,21 @@ public class RestaurantSearchController {
     @Autowired
     OpenMenuService openMenuService;
 
+    boolean madeFirstSearch;
+
     @GetMapping("/search")
     public String RestaurantSearch(Model model) {
         List<Restaurant> results = new ArrayList<>(openMenuService.getResults().values());
         model.addAttribute("results", results);
+        model.addAttribute("processed", madeFirstSearch);
         return "restaurantSearch";
     }
 
     @GetMapping("/getRestaurants")
-    public String RestaurantSearchResults(@RequestParam(name = "zip") String zipcode) {
-        openMenuService.fetchRestaurantsWrapper(zipcode, "");
+    public String RestaurantSearchResults(@RequestParam(name = "location") String city) {
+        city = city.replace(" ", "%20");
+        openMenuService.fetchRestaurantsWrapper("vegan", "", city, "NY");
+        madeFirstSearch = true;
         return "redirect:/search";
     }
-
 }
