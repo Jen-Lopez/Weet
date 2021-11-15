@@ -13,9 +13,9 @@
                     <tr th:each="all:${allergens}">
                         <td>
                             <span th:text="${all.getAllergen()}"></span>
-                            <form th:action="@{/allergenDelete}" th:object="${allergen}" method="post">
-                                <input type="hidden" name="id" th:value="${allergen.id}">
-                                <input type="hidden" name="name" th:value="${allergen.name}">
+                            <form th:action="@{/allergenDelete}" method="post">
+                                <input type="hidden" name="id" th:value="${all.getId()}">
+                                <input type="hidden" name="name" th:value="${all.getAllergen()}">
                                 <button type="submit">Delete</button>
                             </form>
                             <!--<button type="submit" class="btn btn-success" name="action" value="remove">Remove</button>-->
