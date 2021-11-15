@@ -35,5 +35,12 @@ public class UserProfileController {
         model.addAttribute("allergenList", listAllergens);
         return "userProfile";
     }
+    
+    @GetMapping("/allergenDelete")
+    public String allergenDelete(Allergen allergen) {
+        listAllergens.remove(allergen);
+        return "redirect:/user";   
+    }
+   
 
 }

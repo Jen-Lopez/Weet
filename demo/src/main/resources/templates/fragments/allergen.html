@@ -8,14 +8,22 @@
                         <th>Allergens</th>
                     </tr>
                 </thead>
+                
                 <tbody>
                     <tr th:each="all:${allergens}">
                         <td>
                             <span th:text="${all.getAllergen()}"></span>
-                            <button type="submit" class="removebutton" name="action" value="remove">Remove</button>
+                            <form th:action="@{/allergenDelete}" th:object="${allergen}" method="post">
+                                <input type="hidden" name="id" th:value="${allergen.id}">
+                                <input type="hidden" name="name" th:value="${allergen.name}">
+                                <button type="submit">Delete</button>
+                            </form>
+                            <!--<button type="submit" class="btn btn-success" name="action" value="remove">Remove</button>-->
                          </td>                    
                      </tr>
+                     
                 </tbody>
+            
             </table>
         </div>
         <div class="container text-center" style="margin-top: 2%;">
