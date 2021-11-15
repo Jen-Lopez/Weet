@@ -10,8 +10,11 @@
                 </thead>
                 <tbody>
                     <tr th:each="all:${allergens}">
-                        <td th:text="${all.getAllergen()}"></td>
-                    </tr>
+                        <td>
+                            <span th:text="${all.getAllergen()}"></span>
+                            <button type="submit" class="removebutton" name="action" value="remove">Remove</button>
+                         </td>                    
+                     </tr>
                 </tbody>
             </table>
         </div>
