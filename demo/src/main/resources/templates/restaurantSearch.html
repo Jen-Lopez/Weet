@@ -3,35 +3,37 @@
     <head th:replace ="fragments/head::head"></head>
     <body>
         <div th:replace ="fragments/navigator::nav"></div>
-        <main class="container" style="margin-top: 100px;">
-            <div class="d-flex justify-content-center">
-                <h1 class="display-3 text-center" style="margin-right: 20px;">Restaurant Search</h1> 
-                <img th:src="@{images/search-res.png}" width="80px"/>
-            </div>
-            <section id = "filter-options">
-                <form id = "search" th:action="@{/getRestaurants/}" method="get">
-                    <div class="row justify-content-center">
-                        <div class="col-md-5" >
-                            <input class="form-control me-2" type="search" name="location" placeholder='Enter street address or zip code' aria-label="Search">
+        <div class="wrapper">
+            <main class="container" style="margin-top: 100px;">
+                <div class="d-flex justify-content-center">
+                    <h1 class="display-3 text-center" style="margin-right: 20px;">Restaurant Search</h1> 
+                    <img th:src="@{images/search-res.png}" width="80px"/>
+                </div>
+                <section id = "filter-options">
+                    <form id = "search" th:action="@{/getRestaurants/}" method="get">
+                        <div class="row justify-content-center">
+                            <div class="col-md-5" >
+                                <input class="form-control me-2" type="search" name="location" placeholder='Enter street address or zip code' aria-label="Search">
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-outline-success" type="submit">Find Restaurants</button>
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <button class="btn btn-outline-success" type="submit">Find Restaurants</button>
-                        </div>
+                    </form>
+                </section>
+                <section id="results">
+                    <div th:if="${#lists.isEmpty(results) and processed}">
+                        <p class="text-center search-text">No Restaurants Found</p>
                     </div>
-                </form>
-            </section>
-            <section id="results">
-                <div th:if="${#lists.isEmpty(results) and processed}">
-                    <p class="text-center search-text">No Restaurants Found</p>
+                    <div th:if="${not #lists.isEmpty(results)}">
+                        <div th:replace ="fragments/restaurantResults::restResults(results=${results})"></div>
+                    </div>
+                </section>
+                <div id = "spinner" class="text-center">
+                    <div th:replace ="fragments/loading::loading"></div>
                 </div>
-                <div th:if="${not #lists.isEmpty(results)}">
-                    <div th:replace ="fragments/restaurantResults::restResults(results=${results})"></div>
-                </div>
-            </section>
-            <div id = "spinner" class="text-center">
-                <div th:replace ="fragments/loading::loading"></div>
-            </div>
-        </main>
+            </main>
+        </div>
         <div th:replace ="fragments/footer::footer"></div>
         <script type="text/javascript" th:src="@{js/search.js}"></script>
     </body>
