@@ -5,7 +5,7 @@
             <div class="menuListGroup" th:each="group, i : ${restaurant.getMenu().getGroups()}">
                 <h3 class="display-6 sub-menu-head" th:text="${group}"></h3>
                 <div th:each ="item: ${restaurant.getMenu().getDishItems().get(i.index)}">
-                    <p class="menu-item" th:text="${item.getItemName()}"></p>
+                    <p tabindex="0" class="menu-item" data-toggle="popover" data-trigger="focus" th:data-title="${item.getItemName()}" th:data-description="${item.getItemDescription()}" th:text="${item.getItemName()}"></p>
                 </div>
             </div>
         </div>
