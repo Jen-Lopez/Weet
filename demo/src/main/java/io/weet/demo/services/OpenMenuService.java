@@ -107,6 +107,9 @@ public class OpenMenuService {
         newRestaurant.setRestName(restaurantInfo.getString("restaurant_name"));
         newRestaurant.setRestDescription(restaurantInfo.getString("brief_description"));
         newRestaurant.setRestAddress(restaurantInfo.getString("address_1"));
+        newRestaurant.setCity(restaurantInfo.getString("city_town"));
+        newRestaurant.setState(restaurantInfo.getString("state_province"));
+        newRestaurant.setZip(restaurantInfo.getString("postal_code"));
         newRestaurant.setLatitude(restaurantInfo.getString("latitude"));
         newRestaurant.setLongitude(restaurantInfo.getString("longitude"));
         newRestaurant.setWebsite(restaurantInfo.getString("website_url"));

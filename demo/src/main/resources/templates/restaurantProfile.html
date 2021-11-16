@@ -20,7 +20,7 @@
                         <p>
                             <span class="fw-bold">Address:</span>
                             <span th:if="${restaurant.getRestAddress() == ''}">Not Available</span>
-                            <span th:unless="${restaurant.getRestAddress() == ''}" th:text="${restaurant.getRestAddress()}"></span>
+                            <span th:unless="${restaurant.getRestAddress() == ''}" th:text="${restaurant.getRestAddress() + ' ' + restaurant.getCity() + ', ' + restaurant.getState() + ' ' + restaurant.getZip()}"></span>
                             <span th:unless="${restaurant.getRestAddress() == ''}" >(<a th:href="'https://www.google.com/maps/place/'+${restaurant.getRestAddress()}" target="_blank">Directions</a>)</span>
                         </p>
                         <p>
