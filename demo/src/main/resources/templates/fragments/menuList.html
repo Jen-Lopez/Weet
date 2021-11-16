@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+    <body>
+        <div id="menuListContainer" th:fragment="menu(restaurant)">
+            <div class="menuListGroup" th:each="group, i : ${restaurant.getMenu().getGroups()}">
+                <h3 class="display-6 sub-menu-head" th:text="${group}"></h3>
+                <div th:each ="item: ${restaurant.getMenu().getDishItems().get(i.index)}">
+                    <p class="menu-item" th:text="${item.getItemName()}"></p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,4 +1,19 @@
 /* Restaurant Search */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+}
+.wrapper main {
+    overflow: auto;
+}
 
 #search {
     margin-top: 80px;
@@ -35,7 +50,8 @@
     height: 100vh;
     overflow: auto;
 }
-#card-container .card-body:hover {
+
+#card-container .card:hover {
     background-color: #f7fffa;
     cursor: pointer;
 }
@@ -62,23 +78,50 @@
 
 #menu-items .sub-menu-head {
     font-size: 22px;
+    margin: 50px 0 25px 0;
+    letter-spacing: 5px;
 }
 
 #menu-items .menu-type-head {
-    font-size: 30px;
+    font-size: 35px;
+    margin: 50px 0;
 }
 
-#menu-items > h1 {
-    margin-bottom: 50px;
+#menu-items .dishItemDes {
+    margin-bottom: 60px;
 }
 
-#menu-items .card-text {
-    margin-bottom: 100px;
-}
-
-#menu-items .btn {
+#menu-items .viewDish  {
     position: absolute;
     bottom: 20px;
+}
+
+.menu-btn {
+    position: absolute;
+    bottom: 20px;
+}
+
+#full-menu {
+    margin-top: 80px;
+}
+
+#menuListContainer {
+    display: none;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+#menuListContainer .menu-item:hover {
+    color: #738533;
+    cursor: pointer;
+}
+
+.showMenu {
+    display: flex!important;
+}
+
+#menuListContainer .menuListGroup {
+    flex: 33%;
 }
 
 footer {
@@ -88,8 +131,7 @@ footer {
     justify-content: center;
     align-items: center;
     color: grey;
-    position: absolute;
-    bottom: 0;
+    clear: both;
 }
 
 @media screen and (max-width: 600px) {
