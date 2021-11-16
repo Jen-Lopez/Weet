@@ -1,21 +1,15 @@
 package io.weet.demo.models;
 
-import java.util.ArrayList;
-
 public class Dish {
+    private String restID;
     private String itemName;
     private String description;
-    private double price;
-    private String allergyInfo;
-    private String allergens;
+    private String price;
 
-    // Bitmap for restrictions [vegetarian, vegan, kosher, halal]
-    private int[] restriction;
-    private ArrayList<String> menuItemImages;
+    private String thumbnail;
 
-    public Dish() {
-        restriction = new int[4];
-        menuItemImages = new ArrayList<>();
+    public String getResParentID() {
+        return restID;
     }
 
     public String getItemName() {
@@ -26,24 +20,16 @@ public class Dish {
         return description;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public String getAllergyInfo() {
-        return allergyInfo;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public String getAllergens() {
-        return allergens;
-    }
-
-    public int[] getRestrictions() {
-        return restriction;
-    }
-
-    public ArrayList<String> getItemImages() {
-        return menuItemImages;
+    public void setRestID(String restID) {
+        this.restID = restID;
     }
 
     public void setName(String name) {
@@ -54,24 +40,17 @@ public class Dish {
         this.description = des;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public void setAllergyInfo(String info) {
-        this.allergyInfo = info;
+    public void setThumbnail(String img) {
+        this.thumbnail = img;
     }
 
-    public void setAllergens(String allergens) {
-        this.allergens = allergens;
-    }
-
-    public void setRestriction(int index, int value) {
-        this.restriction[index] = value;
-    }
-
-    public void addImage(String image) {
-        this.menuItemImages.add(image);
+    @Override
+    public String toString() {
+        return String.format("Menu Item: %s\nDescription:%s\n", itemName, description);
     }
 
 }

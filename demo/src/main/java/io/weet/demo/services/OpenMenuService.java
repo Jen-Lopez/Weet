@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import io.weet.demo.models.Dish;
+import io.weet.demo.models.Menu;
 import io.weet.demo.models.Restaurant;
 import java.util.*;
 import org.json.*;
@@ -26,100 +27,118 @@ public class OpenMenuService {
         return restaurants.get(id);
     }
 
-    public void fetchRestaurantsWrapper(String zip, String city) {
+    public void fetchRestaurantsWrapper(String query, String zip, String city, String state) {
         try {
             restaurants.clear();
-            fetchRestaurants(zip, city);
+            searchRestaurants(query, zip, city, state);
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private void fetchRestaurants(String zip, String city) throws IOException, InterruptedException {
-        Map <String, Restaurant> newRestaurants = new HashMap<>();
-        String LOCATION_ENDPOINT = String.format("https://openmenu.com/api/v2/location.php?key=%s&postal_code=%s&city=%s&state=%s&country=%s", API_KEY, zip, city, "NY", "US");
+    private void searchRestaurants(String query, String zip, String city, String state) throws IOException, InterruptedException {
+        String SEARCH_ENDPOINT = String.format("https://openmenu.com/api/v2/search.php?key=%s&s=%s&postal_code=%s&city=%s&state=%s&country=%s", API_KEY, query, zip, city, state, "US");
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(LOCATION_ENDPOINT))
+            .uri(URI.create(SEARCH_ENDPOINT))
             .GET()
             .build();
-            System.out.println("GETTING RESTAURANTS");
-            HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-            JSONObject root = new JSONObject(httpResponse.body());
-            JSONArray restaurants = root.getJSONObject("response").getJSONObject("result").getJSONArray("restaurants");
+        System.out.println("GETTING RELEVANT RESULTS....");
+        HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+        JSONObject root = new JSONObject(httpResponse.body());
 
-            for (int i = 0; i < restaurants.length(); i++) {
-                JSONObject jsonRest = restaurants.getJSONObject(i);
-                Restaurant newRest = new Restaurant();
-                newRest.setRestId(jsonRest.getString("id"));
-                newRest.setRestName(jsonRest.getString("restaurant_name"));
-                newRest.setRestAddress(jsonRest.getString("address_1"));
-                newRest.setRestDescription(jsonRest.getString("brief_description"));
-                newRest.setRestCuisine(jsonRest.getString("cuisine_type_primary"));
-                newRest.setLatitude(jsonRest.getString("latitude"));
-                newRest.setLongitude(jsonRest.getString("longitude"));
-                newRest.setWebsite(jsonRest.getString("website_url"));
+        JSONObject result = root.getJSONObject("response").getJSONObject("result");
 
-                fetchRestaurantDetails(newRest);
-                newRestaurants.put(newRest.getRestId(), newRest);                
+        if (result.has("errors")) {
+            System.out.println("No Results.");
+            return;
+        }
+
+        JSONArray matchingItems =result.getJSONArray("items");
+
+        for (int i = 0; i < matchingItems.length(); i++) {
+            JSONObject currItem = matchingItems.getJSONObject(i);
+            Dish newDish = new Dish();
+            newDish.setRestID(currItem.getString("id"));
+            newDish.setName(currItem.getString("menu_item_name"));
+            newDish.setDescription(currItem.getString("menu_item_description"));
+            
+            if (!JSONObject.NULL.equals(currItem.get("menu_item_price"))){
+                newDish.setPrice((String)currItem.get("menu_item_price"));
+            }
+                  
+            if (!JSONObject.NULL.equals(currItem.get("image_url"))){
+                newDish.setThumbnail((String)currItem.get("image_url"));
             }
 
-            this.restaurants = newRestaurants;
+            Restaurant rest;
+            if (!restaurants.containsKey(newDish.getResParentID())) {
+                rest = fetchRestaurantDetails(newDish.getResParentID());
+            }
+            else {
+                rest = getRestaurantDetails(newDish.getResParentID());
+            }
+
+            rest.addMenuItemToUser(newDish);
+            restaurants.put(rest.getRestId(), rest);
+        }
     }
 
-    private void fetchRestaurantDetails(Restaurant rest) throws IOException, InterruptedException {
-        String RESTAURANT_ENDPOINT = String.format("https://openmenu.com/api/v2/restaurant.php?key=%s&id=%s", API_KEY, rest.getRestId());
+    private Restaurant fetchRestaurantDetails(String id) throws IOException, InterruptedException {
+        String RESTAURANT_ENDPOINT = String.format("https://openmenu.com/api/v2/restaurant.php?key=%s&id=%s", API_KEY, id);
         HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-            .uri(URI.create(RESTAURANT_ENDPOINT))
-            .GET()
-            .build();
+            HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(RESTAURANT_ENDPOINT))
+                .GET()
+                .build();
         System.out.println("GETTING RESTAURANT INFO");
+        Restaurant newRestaurant = new Restaurant();
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         JSONObject root = new JSONObject(httpResponse.body());
         JSONObject result = root.getJSONObject("response").getJSONObject("result");
 
-        JSONArray menus = result.getJSONArray("menus");
-        String restPhoneNumber = result.getJSONObject("restaurant_info").getString("phone");
-        rest.setPhone(restPhoneNumber);
+        JSONObject restaurantInfo = result.getJSONObject("restaurant_info");
+        JSONArray menuInfo = result.getJSONArray("menus");
 
-        for (int m = 0; m < menus.length(); m++) {
-            JSONArray menuGroups = menus.getJSONObject(m).getJSONArray("menu_groups");
+        String mainCuisine = result.getJSONObject("environment_info").getString("cuisine_type_primary");
+        
+        newRestaurant.setRestId(id);
+        newRestaurant.setRestCuisine(mainCuisine);
+        newRestaurant.setRestName(restaurantInfo.getString("restaurant_name"));
+        newRestaurant.setRestDescription(restaurantInfo.getString("brief_description"));
+        newRestaurant.setRestAddress(restaurantInfo.getString("address_1"));
+        newRestaurant.setLatitude(restaurantInfo.getString("latitude"));
+        newRestaurant.setLongitude(restaurantInfo.getString("longitude"));
+        newRestaurant.setWebsite(restaurantInfo.getString("website_url"));
+        newRestaurant.setPhone(restaurantInfo.getString("phone"));
+
+        Menu menu = new Menu();
+
+        for (int m = 0; m < menuInfo.length(); m++) {
+            JSONArray menuGroups = menuInfo.getJSONObject(m).getJSONArray("menu_groups");
             for (int mg = 0; mg < menuGroups.length(); mg++) {
-                JSONArray menuItems = menuGroups.getJSONObject(mg).getJSONArray("menu_items");
+                JSONObject group = menuGroups.getJSONObject(mg);
+                menu.addMenuGroup(group.getString("group_name"));
+                JSONArray menuItems = group.getJSONArray("menu_items");
+                ArrayList<Dish> groupDishes = new ArrayList<>();
+
                 for (int mi = 0; mi < menuItems.length(); mi++) {
-                    JSONObject menuItem = menuItems.getJSONObject(mi);
+                    JSONObject item = menuItems.getJSONObject(mi);
                     Dish newDish = new Dish();
+                    newDish.setName(item.getString("menu_item_name"));
+                    newDish.setDescription(item.getString("menu_item_description"));
 
-                    newDish.setName(menuItem.getString("menu_item_name"));  
-                    newDish.setDescription(menuItem.getString("menu_item_description"));
-
-                    newDish.setAllergyInfo(menuItem.getString("menu_item_allergy_information"));
-                    newDish.setAllergens(menuItem.getString("menu_item_allergy_information_allergens"));
-                    
-                    if (!JSONObject.NULL.equals(menuItem.get("vegetarian"))) {
-                        newDish.setRestriction(0, Integer.parseInt((String)menuItem.get("vegetarian")));
-                    }
-                    if (!JSONObject.NULL.equals(menuItem.get("vegan"))) {
-                        newDish.setRestriction(0, Integer.parseInt((String)menuItem.get("vegetarian")));
-                    }
-                    if (!JSONObject.NULL.equals(menuItem.get("kosher"))) {
-                        newDish.setRestriction(0, Integer.parseInt((String)menuItem.get("vegetarian")));
-                    }
-                    if (!JSONObject.NULL.equals(menuItem.get("halal"))) {
-                        newDish.setRestriction(0, Integer.parseInt((String)menuItem.get("vegetarian")));
+                    if (!JSONObject.NULL.equals(item.get("menu_item_price"))){
+                        newDish.setPrice((String)item.get("menu_item_price"));
                     }
 
-
-                    JSONArray images = menuItem.getJSONArray("menu_item_images");
-                    for (int i = 0; i < images.length(); i++) {
-                        newDish.addImage(images.getString(i));
-                    }
-
-                    rest.addMenuItem(newDish);
+                    groupDishes.add(newDish);
                 }
+                menu.addGroupDishes(groupDishes);
             }
         }
-
+        newRestaurant.setMenu(menu);
+        return newRestaurant;
     }
+
 }

@@ -12,10 +12,11 @@ public class Restaurant {
     private String phone;
     private String latitude;
     private String longitude;
-    private ArrayList<Dish> menuItems;
+    private Menu menu;
+    private ArrayList<Dish> userMenuItems;
 
     public Restaurant() {
-        menuItems = new ArrayList<>();
+        userMenuItems = new ArrayList<>();
     }
     
     public String getRestId() {
@@ -54,8 +55,12 @@ public class Restaurant {
         return longitude;
     }
 
-    public ArrayList<Dish> getMenuItems() {
-        return menuItems;
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public ArrayList<Dish> getUserItems() {
+        return userMenuItems;
     }
 
     public void setRestId(String id){
@@ -94,13 +99,17 @@ public class Restaurant {
         this.longitude = lon;
     }
 
-    public void addMenuItem(Dish item) {
-        menuItems.add(item);
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    public void addMenuItemToUser(Dish item) {
+        userMenuItems.add(item);
     }
 
     @Override
     public String toString() {
-        return String.format("ID: %s\nRestaurant Name: %s\nAddress: %s\nCuisine Type: %s\nDescription: %s\nMenuItems:\n%s", id, name, address, cuisine, description, menuItems.toString());
+        return String.format("ID: %s\nRestaurant Name: %s\nAddress: %s\nCuisine Type: %s\nDescription: %s\nMenuItems:\n%d", id, name, address, cuisine, description, userMenuItems.size());
     }
 
 }
