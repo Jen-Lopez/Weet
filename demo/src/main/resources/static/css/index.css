@@ -64,6 +64,10 @@ html,body {
     display: none;
 }
 
+#spinner > div {
+    margin-top: 5px;
+}
+
 #restDetails a {
     color: #5a7877!important;
     text-decoration: none!important;
@@ -72,6 +76,7 @@ html,body {
 #restDetails a:hover {
     text-decoration: underline!important;
 }
+
 #menu-items {
     margin: 50px 0;
 }

@@ -10,27 +10,29 @@
           <main class="container" th:unless="${restaurant == null}" style="margin-top: 100px;">
               <div id ="restDetails" class="d-flex">
                   <div style="padding-right: 20px;">
-                      <h1 class="display-3 text-center" th:text="${restaurant.getRestName()}"></h1>
-                      <p class="lead text-center" th:if="${restaurant.getRestCuisine() != null}" th:text="${restaurant.getRestCuisine()}"></p>
-                      <p  style="margin-top: 30px;">
-                          <span class="fw-bold">Description:</span>
-                          <span th:text="${restaurant.getRestDescription()}"></span>
-                      </p>
-                      <p>
-                          <span class="fw-bold">Address:</span>
-                          <span th:text="${restaurant.getRestAddress()}"></span>
-                          <span>(<a th:href="'https://www.google.com/maps/place/'+${restaurant.getRestAddress()}" target="_blank">Directions</a>)</span>
-                      </p>
-                      <p>
-                          <span class="fw-bold">Website:</span>
-                          <span th:if="${restaurant.getRestSite() == null}">Not Available</span>
-                          <a th:unless="${restaurant.getRestSite() == null}" th:href="${restaurant.getRestSite()}" th:text="${restaurant.getRestSite()}" target="_blank"></a>
-                      </p>
-                      <p>
-                          <span class="fw-bold">Phone:</span>
-                          <span th:if="${restaurant.getPhone() == ''}">Not Available</span>
-                          <span th:unless="${restaurant.getPhone() == null}" th:text="${restaurant.getPhone()}"></span>
-                      </p>
+                        <h1 class="display-3 text-center" th:text="${restaurant.getRestName()}"></h1>
+                        <p class="lead text-center" th:if="${restaurant.getRestCuisine() != null}" th:text="${restaurant.getRestCuisine()}"></p>
+                        <p  style="margin-top: 30px;">
+                            <span class="fw-bold">Description:</span>
+                            <span th:if="${restaurant.getRestDescription() == ''}">Not Available</span>
+                            <span th:unless="${restaurant.getRestDescription() == ''}" th:text="${restaurant.getRestDescription()}"></span>
+                        </p>
+                        <p>
+                            <span class="fw-bold">Address:</span>
+                            <span th:if="${restaurant.getRestAddress() == ''}">Not Available</span>
+                            <span th:unless="${restaurant.getRestAddress() == ''}" th:text="${restaurant.getRestAddress()}"></span>
+                            <span th:unless="${restaurant.getRestAddress() == ''}" >(<a th:href="'https://www.google.com/maps/place/'+${restaurant.getRestAddress()}" target="_blank">Directions</a>)</span>
+                        </p>
+                        <p>
+                            <span class="fw-bold">Website:</span>
+                            <span th:if="${restaurant.getRestSite() == ''}">Not Available</span>
+                            <a th:unless="${restaurant.getRestSite() == ''}" th:href="${restaurant.getRestSite()}" th:text="${restaurant.getRestSite()}" target="_blank"></a>
+                        </p>
+                        <p>
+                            <span class="fw-bold">Phone:</span>
+                            <span th:if="${restaurant.getPhone() == ''}">Not Available</span>
+                            <span th:unless="${restaurant.getPhone() == null}" th:text="${restaurant.getPhone()}"></span>
+                        </p>
                   </div>
                   <div class="flex-grow-1 text-center">
                       <img th:src="@{images/rest-placeholder.jpeg}" class="img-fluid rounded-start rest-img" alt="...">
