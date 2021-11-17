@@ -147,6 +147,12 @@ html,body {
     flex: 33%;
 }
 
+.search-text {
+    margin-top: 100px;
+    font-size: 20px;
+    letter-spacing: 5px;
+}
+
 footer {
     height: 100px;
     width: 100%;
