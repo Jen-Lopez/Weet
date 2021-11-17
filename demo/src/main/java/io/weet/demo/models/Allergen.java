@@ -27,4 +27,6 @@ public class Allergen {
     public String toString(){
         return String.format("ID = %d; Allergen = %s", id, allergen);
     }
+    
+    
 }

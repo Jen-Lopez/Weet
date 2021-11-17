@@ -7,6 +7,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 
@@ -35,5 +37,18 @@ public class UserProfileController {
         model.addAttribute("allergenList", listAllergens);
         return "userProfile";
     }
+    
+    @PostMapping("/allergenDelete")
+    public String allergenDelete(@RequestParam(name = "id") int id) {
+        for (int i = 0; i < listAllergens.size(); i++) {
+            Allergen a = listAllergens.get(i);
+            if (a.getId() == id) {
+                listAllergens.remove(a);
+                break;
+            }
+        }
+        return "redirect:/user";   
+    }
+   
 
 }
