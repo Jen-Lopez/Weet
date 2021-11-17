@@ -105,8 +105,13 @@ html,body {
     margin: 50px 0;
 }
 
-#menu-items .dishItemDes {
-    margin-bottom: 60px;
+
+#menu-items .card-title {
+    margin-bottom: 80px;
+}
+
+#menu-items .modal-dish-des {
+    padding: 20px 0;
 }
 
 #menu-items .viewDish  {
@@ -141,7 +146,6 @@ html,body {
 #menuListContainer .menuListGroup {
     flex: 33%;
 }
-
 
 footer {
     height: 100px;
