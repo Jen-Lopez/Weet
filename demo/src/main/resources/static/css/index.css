@@ -56,6 +56,19 @@ html,body {
     cursor: pointer;
 }
 
+#card-container .display-dish-count {
+    background-color:#8baf9b;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    border-radius: 35%;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
 .rest-img {
     height: 100%;
 }
@@ -92,8 +105,13 @@ html,body {
     margin: 50px 0;
 }
 
-#menu-items .dishItemDes {
-    margin-bottom: 60px;
+
+#menu-items .card-title {
+    margin-bottom: 80px;
+}
+
+#menu-items .modal-dish-des {
+    padding: 20px 0;
 }
 
 #menu-items .viewDish  {
@@ -127,6 +145,12 @@ html,body {
 
 #menuListContainer .menuListGroup {
     flex: 33%;
+}
+
+.search-text {
+    margin-top: 100px;
+    font-size: 20px;
+    letter-spacing: 5px;
 }
 
 footer {

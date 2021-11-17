@@ -8,8 +8,7 @@
                         <img th:src="@{images/food-placeholder.jpg}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${item.getItemName()}"></h5>
-                            <p class="card-text dishItemDes" th:text="${item.getItemDescription()}"></p>
-                            
+
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-outline-success viewDish" data-bs-toggle="modal" th:data-bs-target="|#Modal${status.index}|">
                             View Dish Details
@@ -24,7 +23,8 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        ...
+                                        <p th:if="${item.getItemDescription() == ''}">Description not available</p>
+                                        <p class = "modal-dish-des" th:unless="${item.getItemDescription() == ''}" th:text="${item.getItemDescription()}"></p>
                                     </div>
                                     </div>
                                 </div>
