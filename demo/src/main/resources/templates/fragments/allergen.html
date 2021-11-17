@@ -26,8 +26,28 @@
             
             </table>
         </div>
-        <div class="container text-center" style="margin-top: 2%;">
-            <button type="submit" class="btn btn-success">Add Allergen</button>
+         <!-- Button trigger modal -->
+         <button type="button" class="btn btn-success addAllergen" data-bs-toggle="modal" data-bs-target="#allergenmodal">
+            Add Allergen
+            </button>
+
+            <!-- MODAL -->
+            <div class="modal fade" id="allergenmodal" tabindex="-1" aria-labelledby="addAllergen" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class=“modal-title” id=“addAllergen” >Enter the Name of Your Allergen</h5>                       
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="name"/>
+                        <button type="submit" class="btn btn-success">Save</button>
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+  
             </div>
         </div>
     </body>
