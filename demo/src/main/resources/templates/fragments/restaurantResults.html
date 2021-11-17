@@ -16,6 +16,9 @@
                                     <span class="card-text"><small class="text-muted" th:text="${rest.getRestAddress()}"></small></span><br/>
                                     <span class="card-text"><small class="text-muted" th:text="${rest.getCity() + ', ' + rest.getState() + ' ' + rest.getZip()} "></small></span>
                                 </div>
+                                <div class="display-dish-count">
+                                    <span th:text="${#lists.size(rest.getUserItems())}"></span>
+                                </div>
                             </div>
                         </div>
                     </div>

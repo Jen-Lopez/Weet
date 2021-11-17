@@ -56,6 +56,19 @@ html,body {
     cursor: pointer;
 }
 
+#card-container .display-dish-count {
+    background-color:#8baf9b;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    border-radius: 35%;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
 .rest-img {
     height: 100%;
 }
@@ -128,6 +141,7 @@ html,body {
 #menuListContainer .menuListGroup {
     flex: 33%;
 }
+
 
 footer {
     height: 100px;
