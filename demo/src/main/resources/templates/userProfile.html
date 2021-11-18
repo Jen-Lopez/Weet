@@ -5,12 +5,16 @@
         <div th:replace ="fragments/navigator::nav"></div>
         <div class="wrapper">
             <main style="margin-top: 100px;">
-                <div>
                     <h1 class="display-3 text-center"> User Profile </h1>
-                    <div th:replace ="fragments/allergen::allergenList(allergens=${allergenList})"></div>
-                </div>
+                    <div th:replace ="fragments/allergen::allergenList(allergens=${allergenList})"></div>  
+                    <div class="text-center">
+                        <a href="/search">
+                            <button type="button" class="btn btn-secondary" style="margin-top: 80px;">Begin Search</button>
+                        </a>
+                    </div>
             </main>
         </div>
         <div th:replace ="fragments/footer::footer"></div>
+        <script type="text/javascript" th:src="@{js/validation.js}"></script>
     </body>
 </html>
