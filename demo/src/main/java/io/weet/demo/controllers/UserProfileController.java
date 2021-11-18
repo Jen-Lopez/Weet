@@ -49,6 +49,14 @@ public class UserProfileController {
         }
         return "redirect:/user";   
     }
+
+    @PostMapping("/addAllergen")
+    public String addAllergen(@RequestParam(name = "name") Allergen newAllergen) {
+        
+         listAllergens.add(newAllergen);
+        
+        return "redirect:/user";   
+    }
    
 
 }
