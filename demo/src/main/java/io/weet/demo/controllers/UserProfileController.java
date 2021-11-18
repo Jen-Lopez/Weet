@@ -51,10 +51,8 @@ public class UserProfileController {
     }
 
     @PostMapping("/addAllergen")
-    public String addAllergen(@RequestParam(name = "name") Allergen newAllergen) {
-        
-         listAllergens.add(newAllergen);
-        
+    public String addAllergen(@RequestParam(name = "name") String name) {
+         listAllergens.add(new Allergen(listAllergens.size()+1, name));
         return "redirect:/user";   
     }
    
