@@ -69,6 +69,23 @@ html,body {
     font-weight: bold;
 }
 
+/* .card-body {
+    background-color: #CD5C5C;
+} */
+.card-text {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* border: 1px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom, white); */
+    padding-left: 70px;
+    padding-right: 70px;
+    /* background-color: #CD5C5C; */
+    color: black;
+
+}
+
 .rest-img {
     height: 100%;
 }
@@ -139,6 +156,12 @@ html,body {
     color: #738533;
 }
 
+.navbar{
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+
+}
 .green-link, .green-link:hover{
     color: #738533;
     text-decoration: none;
