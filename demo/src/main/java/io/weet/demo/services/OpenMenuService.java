@@ -15,8 +15,8 @@ import java.net.URI;
 @Service
 public class OpenMenuService {
 
-    @Value("${API_KEY}")
-    private String API_KEY;
+    //@Value("${API_KEY}")
+    private String API_KEY = "b993655e-3b78-11ec-bee9-525400552a35";
     private Map<String, Restaurant> restaurants = new HashMap<>();
 
     public Map<String, Restaurant> getResults() {
