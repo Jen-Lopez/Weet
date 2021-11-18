@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
-    <body th:fragment="allergenList(allergens)">
+    <div th:fragment="allergenList(allergens)">
         <div class="container">
-            <table class="table table-bordered table-striped">
+            <table id="allergen-list" class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
                         <th>Allergens</th>
@@ -11,44 +11,52 @@
                 
                 <tbody>
                     <tr th:each="all:${allergens}">
-                        <td>
-                            <span th:text="${all.getAllergen()}"></span>
-                            <form th:action="@{/allergenDelete}" method="post">
-                                <input type="hidden" name="id" th:value="${all.getId()}">
-                                <input type="hidden" name="name" th:value="${all.getAllergen()}">
-                                <button type="submit">Delete</button>
-                            </form>
+                        <td class="d-flex justify-content-between">
+                            <div>
+                                <span class ="allergen-name" th:text="${all.getAllergen()}"></span>
+                            </div>
+                            <div>
+                                <form th:action="@{/allergenDelete}" method="post">
+                                    <input type="hidden" name="id" th:value="${all.getId()}">
+                                    <input type="hidden" name="name" th:value="${all.getAllergen()}">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </div>
                          </td>                    
                      </tr>
                      
                 </tbody>
             
             </table>
-        </div>
-         <!-- Button trigger modal -->
-         <button type="button" class="btn btn-success addAllergen" data-bs-toggle="modal" data-bs-target="#allergenmodal">
-            Add Allergen
-            </button>
+             <!-- Button trigger modal -->
+            <div class="text-end">
+                <button id="add-allergen" type="button" class="btn btn-success addAllergen" data-bs-toggle="modal" data-bs-target="#allergenmodal">
+                    Add Allergen
+                </button>
+            </div>
+           
 
-            <!-- MODAL -->
-            <div class="modal fade" id="allergenmodal" tabindex="-1" aria-labelledby="addAllergen" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class=“modal-title” id=“addAllergen” >Enter the Name of Your Allergen</h5>                       
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
+        <!-- MODAL -->
+        <div class="modal fade" id="allergenmodal" tabindex="-1" aria-labelledby="addAllergen" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class=“modal-title” id=“addAllergen” >Enter Allergen</h5>                       
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                     <div class="modal-body">
-                        <form th:action="@{/addAllergen}" method="post">
-                            <input type="text" class="form-control" name="name" />
-                            <button type="submit" class="btn btn-success">Save</button>
+                        <form class="needs-validation" novalidate th:action="@{/addAllergen}" method="post">
+                            <input type="text" class="form-control" name="name" required placeholder='"Peanuts"'/>
+                            <div class="invalid-feedback">
+                                Invalid Allergen
+                            </div>
+                            <div class="text-end">
+                                <button id="save-allergen" type="submit" class="btn btn-success">Save</button>
+                            </div>
                         </form>
                     </div>
                 </div>
-                </div>
-            </div>
-  
             </div>
         </div>
-    </body>
+    </div>
 </html>

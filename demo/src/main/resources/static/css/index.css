@@ -172,6 +172,23 @@ html,body {
     margin-top: 50px;
 }
 
+/* USER PROFILE */
+#add-allergen {
+    margin-top: 10px;
+}
+
+#allergen-list {
+    margin-top: 50px;
+}
+
+.allergen-name {
+    font-weight: 300;
+}
+
+#save-allergen {
+    margin-top: 30px;
+}
+
 footer {
     height: 100px;
     width: 100%;
