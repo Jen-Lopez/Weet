@@ -189,6 +189,12 @@ html,body {
     margin-top: 30px;
 }
 
+#map {
+    height: 80%; 
+    width: 80%;
+    margin: auto;
+}
+
 footer {
     height: 100px;
     width: 100%;

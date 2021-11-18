@@ -31,6 +31,8 @@ public class RestaurantSearchController {
     @GetMapping("/getRestaurants")
     public String RestaurantSearchResults(@RequestParam(name = "location") String city) {
         city = city.replace(" ", "%20");
+        // replace coordinates with what is returned from google autocomplete
+        openMenuService.setLocation((float)40.730610, (float)-73.935242);
         openMenuService.fetchRestaurantsWrapper("vegan", "", city, "NY");
         madeFirstSearch = true;
         return "redirect:/search";

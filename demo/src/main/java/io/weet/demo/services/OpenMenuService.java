@@ -16,8 +16,18 @@ import java.net.URI;
 public class OpenMenuService {
 
     @Value("${API_KEY}")
-    String API_KEY;
+    private String API_KEY;
+    private Map<String, Float> coordinates = new HashMap<>();
     private Map<String, Restaurant> restaurants = new HashMap<>();
+
+    public void setLocation(float lat, float lon) { 
+        this.coordinates.put("lat", lat);
+        this.coordinates.put("long", lon);
+    }
+
+    public Map<String, Float> getCoordinates() {
+        return coordinates;
+    } 
 
     public Map<String, Restaurant> getResults() {
         return restaurants;
