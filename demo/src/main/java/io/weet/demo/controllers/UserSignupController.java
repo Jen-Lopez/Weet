@@ -4,17 +4,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 @Controller
-public class UserLoginController {
-
-    @GetMapping("/login")
+public class UserSignupController {
+    
+    @GetMapping("/signup")
     public String userLogin() {
-        return "userLogin";
+        return "userSignup";
     }
 
-    @PostMapping("/checkLogin")
-    public String validateLogin() {
+    @PostMapping("/createUser")
+    public String createUser() {
         return "redirect:/user";
     }
 
