@@ -1,15 +1,21 @@
 function initMap() {
     getLocation()
-    .then(coords => {
+    .then(data => {
+
         let map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: coords.lat, lng: coords.long },
-            zoom: 12,
+            center: { lat: data.location.lat, lng: data.location.long },
+            zoom: 10,
+        });
+
+        for (let i = 0; i < data.all.length; i++) {
+            console.log(JSON.stringify(data.all[i]));
+            new google.maps.Marker({
+                position: { lat: data.all[i].lat, lng: data.all[i].long },
+                map,
+                title: `${data.all[i].name}`,
             });
-        // new google.maps.Marker({
-        //     position: { lat: -25.363, lng: 131.044 },
-        //     map,
-        //     title: "Hello World!",
-        //     });
+        }
+
     })
 }
 
