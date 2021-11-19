@@ -1,20 +1,32 @@
+/* GOOGLE MAPS */
+
 function initMap() {
     getLocation()
     .then(data => {
 
         let map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: data.location.lat, lng: data.location.long },
-            zoom: 10,
+            center: { lat: data.lat, lng: data.long },
+            zoom: 13,
         });
 
-        for (let i = 0; i < data.all.length; i++) {
-            console.log(JSON.stringify(data.all[i]));
-            new google.maps.Marker({
-                position: { lat: data.all[i].lat, lng: data.all[i].long },
-                map,
-                title: `${data.all[i].name}`,
-            });
-        }
+        const infoWindow = new google.maps.InfoWindow({
+            content: "",
+            disableAutoPan: true,
+        });
+
+        const markers = data.all.map((rest) => {
+        const label = rest.name;
+        const marker = new google.maps.Marker({
+            position: { lat: rest.lat, lng: rest.long },
+            map,
+        });
+        
+        marker.addListener("click", () => {
+            infoWindow.setContent(label);
+            infoWindow.open(map, marker);
+        });
+        return marker;
+    });
 
     })
 }
@@ -27,7 +39,5 @@ async function getLocation () {
         })
         .catch(error => console.warn(error));
 }
-
-
 
 google.maps.event.addDomListener(window, 'load', initMap);

@@ -13,7 +13,13 @@
                     <form id = "search" class="needs-validation" novalidate th:action="@{/getRestaurants/}" method="get">
                         <div class="row justify-content-center">
                             <div class="col-md-5" >
-                                <input class="form-control me-2" type="search" name="location" placeholder='Enter street address or zip code' aria-label="Search" required>
+                                <input id = "autocomplete" class="form-control me-2" type="search" name="location" placeholder='Enter street address or zip code' aria-label="Search" required>
+                                <input id = "coordsLat" type="hidden" name="lat">
+                                <input id = "coordsLong" type="hidden" name="long">
+                                <input id = "g-city" type="hidden" name="city">
+                                <input id = "g-state" type="hidden" name="state">
+                                <input id = "g-nbhood" type="hidden" name="nbhood">
+                                <input id = "g-zip" type="hidden" name="zip">
                                 <div class="invalid-feedback">
                                     Invalid Location
                                 </div>
@@ -38,7 +44,10 @@
             </main>
         </div>
         <div th:replace ="fragments/footer::footer"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6xVGUQHl1qnE0KaRLDFgveoSzS6dJ_pg&libraries=places"></script>
+        <script type="text/javascript" th:src="@{js/maps.js}"></script>
         <script type="text/javascript" th:src="@{js/search.js}"></script>
         <script type="text/javascript" th:src="@{js/validation.js}"></script>
+        <script type="text/javascript" th:src="@{js/autocomplete.js}"></script>
     </body>
 </html>
