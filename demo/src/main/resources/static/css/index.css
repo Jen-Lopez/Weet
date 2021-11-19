@@ -21,6 +21,7 @@ html,body {
 
 #filter-options {
     margin-top: 50px;
+    padding-bottom: 20px;
 }
 
 #filter-options .dropdown {
@@ -140,7 +141,7 @@ html,body {
 }
 
 .green-link, .green-link:hover{
-    color: #738533;
+    color: #188753;
     text-decoration: none;
 }
 

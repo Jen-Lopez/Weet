@@ -18,16 +18,24 @@ public class OpenMenuService {
     @Value("${API_KEY}")
     private String API_KEY;
     private Map<String, Float> coordinates = new HashMap<>();
+    private Map<String, Object> locationDetails = new HashMap<>();
     private Map<String, Restaurant> restaurants = new HashMap<>();
 
-    public void setLocation(float lat, float lon) { 
-        this.coordinates.put("lat", lat);
-        this.coordinates.put("long", lon);
+    public void setLocationDetails(String key, Object value) { 
+        this.locationDetails.put(key, value);
     }
 
-    public Map<String, Float> getCoordinates() {
+    public void setCoordinates(String key, Float value) {
+        this.coordinates.put(key, value);
+    }
+
+    public Map <String, Float> getCoordinates() {
         return coordinates;
-    } 
+    }
+
+    public Map <String, Object> getLocationDetails() {
+        return locationDetails;
+    }
 
     public Map<String, Restaurant> getResults() {
         return restaurants;
@@ -37,17 +45,19 @@ public class OpenMenuService {
         return restaurants.get(id);
     }
 
-    public void fetchRestaurantsWrapper(String query, String zip, String city, String state) {
+    public void fetchRestaurantsWrapper() {
         try {
             restaurants.clear();
-            searchRestaurants(query, zip, city, state);
+            searchRestaurants("vegan", (String)locationDetails.getOrDefault("city", ""), (String)locationDetails.getOrDefault("state", ""), (String)locationDetails.getOrDefault("zip", ""));
+            locationDetails.clear();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private void searchRestaurants(String query, String zip, String city, String state) throws IOException, InterruptedException {
+    private void searchRestaurants(String query, String city, String state, String zip) throws IOException, InterruptedException {
         String SEARCH_ENDPOINT = String.format("https://openmenu.com/api/v2/search.php?key=%s&s=%s&postal_code=%s&city=%s&state=%s&country=%s", API_KEY, query, zip, city, state, "US");
+        System.out.println(String.format("The args are ---- city: %s state: %s zip: %s", city,state, zip));
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(SEARCH_ENDPOINT))

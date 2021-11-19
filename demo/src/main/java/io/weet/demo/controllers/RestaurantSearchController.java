@@ -29,11 +29,24 @@ public class RestaurantSearchController {
     }
 
     @GetMapping("/getRestaurants")
-    public String RestaurantSearchResults(@RequestParam(name = "location") String city) {
-        city = city.replace(" ", "%20");
-        // replace coordinates with what is returned from google autocomplete
-        openMenuService.setLocation((float)40.730610, (float)-73.935242);
-        openMenuService.fetchRestaurantsWrapper("vegan", "", city, "NY");
+    public String RestaurantSearchResults(@RequestParam(name = "city") String city, @RequestParam(name = "state") String state, @RequestParam(name = "nbhood") String nbhood, @RequestParam(name = "zip") String zip, @RequestParam(name = "lat") String latCoords, @RequestParam(name = "long") String longCoords) {
+        openMenuService.setCoordinates("lat", Float.parseFloat(latCoords));
+        openMenuService.setCoordinates("long", Float.parseFloat(longCoords));
+
+        if (!city.isEmpty()) {
+            openMenuService.setLocationDetails("city", city.replace(" ", "%20"));
+        }
+        if (!zip.isEmpty()) {
+            openMenuService.setLocationDetails("zip", zip);
+            openMenuService.setLocationDetails("city", "");
+        }
+
+        if (!nbhood.isEmpty() && zip.isEmpty()) {
+            openMenuService.setLocationDetails("city", nbhood.replace(" ", "%20"));
+        }
+        openMenuService.setLocationDetails("state", state);
+
+        openMenuService.fetchRestaurantsWrapper();
         madeFirstSearch = true;
         return "redirect:/search";
     }

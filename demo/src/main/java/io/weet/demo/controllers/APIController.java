@@ -18,7 +18,9 @@ public class APIController {
     @GetMapping("/getMap")
     public Map<String, Object> getMapData() {
         Map<String, Object> results = new HashMap<>();
-        results.put("location", openMenuService.getCoordinates());
+        results.put("lat", openMenuService.getCoordinates().get("lat"));
+        results.put("long", openMenuService.getCoordinates().get("long"));
+
         ArrayList<Map<String, Object>> rests = new ArrayList<>();
         for (Restaurant r : openMenuService.getResults().values()) {
             Map<String, Object> currRest = new HashMap<>(); 
