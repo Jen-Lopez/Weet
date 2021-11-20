@@ -17,9 +17,8 @@
                             </div>
                             <div>
                                 <form th:action="@{/allergenDelete}" method="post">
-                                    <input type="hidden" name="id" th:value="${all.getId()}">
                                     <input type="hidden" name="name" th:value="${all.getAllergen()}">
-                                    <button type="submit">Delete</button>
+                                    <button type="submit" class="btn btn-secondary">Delete</button>
                                 </form>
                             </div>
                          </td>                    
@@ -45,13 +44,11 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="needs-validation" novalidate th:action="@{/addAllergen}" method="post">
-                            <input type="text" class="form-control" name="name" required placeholder='"Peanuts"'/>
-                            <div class="invalid-feedback">
-                                Invalid Allergen
-                            </div>
+                        <form id = "allergen-form" th:action="@{/addAllergen}" method="post">
+                            <input id="allergen-search" type="text" class="form-control" name="name" required placeholder='"Peanuts"'/>
+                            <div id ="results"></div>
                             <div class="text-end">
-                                <button id="save-allergen" type="submit" class="btn btn-success">Save</button>
+                                <button id="save-allergen" type="submit" class="btn btn-success" disabled>Save</button>
                             </div>
                         </form>
                     </div>

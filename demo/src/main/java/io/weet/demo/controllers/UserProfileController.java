@@ -1,7 +1,9 @@
 package io.weet.demo.controllers;
 import io.weet.demo.models.Allergen;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Controller;
@@ -13,41 +15,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 
 public class UserProfileController {
-    private List<Allergen> listAllergens;
+    private Map<String, Allergen> allergenList = new HashMap<>();
+
     // fetch this from DB
     @PostConstruct
     private void loadData(){
-        Allergen emp1= new Allergen(1, "Peanuts");
-        Allergen emp2= new Allergen(2, "Eggs");
+        Allergen emp1= new Allergen("Peanuts");
+        Allergen emp2= new Allergen("Eggs");
 
-        listAllergens=new ArrayList<>();
-        listAllergens.add(emp1);
-        listAllergens.add(emp2);
+        allergenList.put(emp1.getAllergen(), emp1);
+        allergenList.put(emp2.getAllergen(), emp2);
     }
 
     @GetMapping("/user")
     public String userProfile(Model model) {
-        model.addAttribute("allergenList", listAllergens);
+        model.addAttribute("allergenList", new ArrayList<>(allergenList.values()));
         return "userProfile";
     }
     
     @PostMapping("/allergenDelete")
-    public String allergenDelete(@RequestParam(name = "id") int id) {
-        for (int i = 0; i < listAllergens.size(); i++) {
-            Allergen a = listAllergens.get(i);
-            if (a.getId() == id) {
-                listAllergens.remove(a);
-                break;
-            }
+    public String allergenDelete(@RequestParam(name = "name") String name) {
+        if (allergenList.containsKey(name)) {
+            allergenList.remove(name);
         }
         return "redirect:/user";   
     }
 
     @PostMapping("/addAllergen")
     public String addAllergen(@RequestParam(name = "name") String name) {
-         listAllergens.add(new Allergen(listAllergens.size()+1, name));
+        allergenList.put(name, new Allergen(name));
         return "redirect:/user";   
     }
-   
-
 }

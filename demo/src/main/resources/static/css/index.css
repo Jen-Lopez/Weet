@@ -196,6 +196,18 @@ html,body {
     margin: auto;
 }
 
+#allergen-form > #results {
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #afc9bc;
+    z-index: 10;
+}
+
+#allergen-form {
+    position: relative;
+}
+
 footer {
     height: 100px;
     width: 100%;

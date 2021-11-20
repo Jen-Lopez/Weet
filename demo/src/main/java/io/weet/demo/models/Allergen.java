@@ -1,21 +1,14 @@
 package io.weet.demo.models;
 
 public class Allergen {
-    private int id;
     private String allergen;
 
     public Allergen(){}
 
-    public Allergen(int id, String allergen){
-        this.id=id;
+    public Allergen(String allergen){
         this.allergen=allergen;
     }
-    public int getId(){
-        return id;
-    }
-    public void setId(int id){
-        this.id=id;
-    }
+  
     public String getAllergen(){
         return allergen;
     }
@@ -25,8 +18,7 @@ public class Allergen {
 
     @Override
     public String toString(){
-        return String.format("ID = %d; Allergen = %s", id, allergen);
+        return String.format("Allergen = %s", allergen);
     }
-    
     
 }
