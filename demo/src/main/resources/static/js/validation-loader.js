@@ -11,6 +11,9 @@
             event.preventDefault();
             event.stopPropagation();
           }
+          else {
+              loader();
+          }
           form.classList.add('was-validated');
         }, false);
       });

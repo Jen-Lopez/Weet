@@ -9,12 +9,12 @@
                     <div th:replace ="fragments/allergen::allergenList(allergens=${allergenList})"></div>  
                     <div class="text-center">
                         <a href="/search">
-                            <button type="button" class="btn btn-secondary" style="margin-top: 80px;">Begin Search</button>
+                            <button type="button" class="btn btn-dark" style="margin-top: 80px;">Begin Search</button>
                         </a>
                     </div>
             </main>
         </div>
         <div th:replace ="fragments/footer::footer"></div>
-        <script type="text/javascript" th:src="@{js/validation.js}"></script>
+        <script type="text/javascript" th:src="@{js/allergenAuto.js}"></script>
     </body>
 </html>
