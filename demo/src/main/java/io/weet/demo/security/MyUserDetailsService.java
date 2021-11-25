@@ -1,4 +1,4 @@
-package io.security;
+package io.weet.demo.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +15,7 @@ public class MyUserDetailsService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByusername(username).get(0);
 
         if (user == null) {
             throw new UsernameNotFoundException(username);
@@ -24,8 +24,4 @@ public class MyUserDetailsService implements UserDetailsService{
         return new MyUserPrincipal(user); 
         
     }
-
-    
-    
-
 }

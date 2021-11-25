@@ -1,5 +1,4 @@
-package io.security;
-import io.javabrains.springsecurityjwt.util;
+package io.weet.demo.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -7,7 +6,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Date;
 
 import com.mongodb.Function;
 

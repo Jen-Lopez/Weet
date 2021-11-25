@@ -1,4 +1,4 @@
-package io.security;
+package io.weet.demo.security;
 
 //output structure 
 public class AuthenticationResponse {

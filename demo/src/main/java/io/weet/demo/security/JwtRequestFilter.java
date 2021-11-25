@@ -1,4 +1,4 @@
-package io.security;
+package io.weet.demo.security;
 
 import java.io.IOException;
 
@@ -34,7 +34,7 @@ public class JwtRequestFilter extends OncePerRequestFilter{
         final String authorizationHeader = request.getHeader("Authorization");
 
         String username = null; 
-        String jwt; 
+        String jwt = ""; 
 
         if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
             jwt = authorizationHeader.substring(7);

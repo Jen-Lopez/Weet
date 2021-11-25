@@ -1,4 +1,4 @@
-package io.security;
+package io.weet.demo.security;
 
 //define input args to authenticate method; what user will send in post request
 public class AuthenticationRequest {

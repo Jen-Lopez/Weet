@@ -1,4 +1,4 @@
-package io.security;
+package io.weet.demo.security;
 
 import java.util.Collection;
 

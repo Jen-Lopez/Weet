@@ -1,0 +1,60 @@
+{
+  "allergens": [
+    {
+      "peanuts": [
+        "peanut free",
+        "nut free"
+      ]
+    },
+    {
+      "milk": [
+        "no milk",
+        "milk free"
+      ]
+    },
+    {
+      "gluten": [
+        "wheat free",
+        "gluten free",
+        "no gluten"
+      ]
+    },
+    {
+      "fish": [
+        "no fish",
+        "fish free"
+      ]
+    },
+    {
+      "eggs": [
+        "egg free",
+        "no eggs"
+      ]
+    },
+    {
+      "soybeans": [
+        "soybean free",
+        "soy free",
+        "no soybeans"
+      ]
+    },
+    {
+      "tree nuts": [
+        "no tree nuts",
+        "tree nut free"
+      ]
+    },
+    {
+      "shellfish": [
+        "no shellfish",
+        "shellfish free"
+      ]
+    },
+    {
+      "sesame": [
+        "no sesame",
+        "sesame free"
+      ]
+    }
+  ]
+}
