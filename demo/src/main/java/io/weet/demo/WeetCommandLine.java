@@ -1,14 +1,16 @@
 package io.weet.demo;
+/*
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import io.weet.demo.models.User;
-import io.weet.demo.services.UserRepository;
+import io.weet.demo.models.UserModel;
+import io.weet.demo.repositories.UserRepository;
 
 // @SpringBootApplication
+
 public class WeetCommandLine implements CommandLineRunner {
 
 	@Autowired
@@ -32,8 +34,8 @@ public class WeetCommandLine implements CommandLineRunner {
 		boolean goodUser = false;
 		boolean loggedIn = false;
 		// save some users
-		repository.save(new User("Alice", "Smith", "alicesmith", "pass"));
-		repository.save(new User("Bob", "Smith", "bob", "pswd1234"));
+		repository.save(new UserModel("Alice", "Smith", "alicesmith", "pass"));
+		repository.save(new UserModel("Bob", "Smith", "bob", "pswd1234"));
 		// main running loop
 		while(running) {
 			Scanner scanner = new Scanner(System.in);
@@ -60,7 +62,7 @@ public class WeetCommandLine implements CommandLineRunner {
 				}
 				System.out.println("Please enter a password.");
 				NewPassword = scanner.nextLine();
-				repository.save(new User(NewFirstName, NewLastName, NewUsername, NewPassword));
+				repository.save(new UserModel(NewFirstName, NewLastName, NewUsername, NewPassword));
 			}
 			else if(input.toLowerCase().equals("login")) {
 				while(!loggedIn) {
@@ -91,7 +93,7 @@ public class WeetCommandLine implements CommandLineRunner {
 
 		}
 
-		/* // Example code
+		// Example code
 		// fetch all customers
 		System.out.println("Customers found with findAll():");
 		System.out.println("-------------------------------");
@@ -110,6 +112,8 @@ public class WeetCommandLine implements CommandLineRunner {
 		for (User customer : repository.findByLastName("Smith")) {
 			System.out.println(customer);
 		}
-		*/
+		
 	}
 }
+
+*/

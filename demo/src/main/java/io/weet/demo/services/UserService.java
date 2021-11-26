@@ -1,43 +1,52 @@
 package io.weet.demo.services;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import io.weet.demo.models.Allergen;
-import io.weet.demo.models.User;
+import io.weet.demo.models.UserModel;
+import io.weet.demo.repositories.UserRepository;
 
-@Service @Transactional
-public class UserService implements UserServiceInterface{
+@Service
+public class UserService implements UserServiceInterface {
 
-	@Autowired
-	private UserRepository repository;
-    
+    private final Set<GrantedAuthority> authorities = new HashSet<>();
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
+
     @Override
-    public User saveUser(User user) {
-        // TODO Auto-generated method stub
-        return repository.save(user);
+    public UserModel saveUser(UserModel user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
     @Override
-    public void addAllergies(User user, Allergen allergen) {
-        // TODO Auto-generated method stub
-        // repository.addAllergies(user, allergen);  
-    }
-
-    @Override
-    public User getUser(String username) {
-        // TODO Auto-generated method stub
-        User user = repository.findByFirstName(username);
+    public UserModel getUser(String email) {
+        UserModel user = userRepository.findByEmail(email);
         return user;
     }
 
     @Override
-    public List<User> getUsers() {
-        // TODO Auto-generated method stub
-        return repository.findAll();
-    }
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     
+        UserModel user = userRepository.findByEmail(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid email and/or password");
+        }
+        authorities.add(new SimpleGrantedAuthority("USER"));
+        return new User(user.getEmail(), user.getPassword(), authorities);
+    }
+
 }
