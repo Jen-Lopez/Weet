@@ -15,6 +15,43 @@ html,body {
     overflow: auto;
 }
 
+#main-logo-heading {
+    letter-spacing: 20px;
+    color: #a4bb94;
+}
+
+#main-logo-card {
+    margin: 20px auto 0 auto;
+    width: 60%;
+}
+
+#get-started-btn {
+    background-color: #cae5b7;
+    border-radius: 15px;
+    width: 190px;
+    height: 50px;
+    border: none;
+    color: #627058;
+}
+
+.btn-success {
+    border-color: #cae5b7!important;
+    background-color: #cae5b7!important;
+    color: #66874f;
+}
+
+.btn-success:hover, .btn-success:active, .btn-success:focus{
+    color: #55604c;
+}
+
+#get-started-btn:hover {
+    background-color: #d5f1c2;
+}
+
+.login-subhead {
+    color: #93a587;
+}
+
 #search {
     margin-top: 80px;
 }
@@ -42,11 +79,6 @@ html,body {
     margin: auto;
 }
 
-#or-div {
-    font-size: 20px;
-    font-weight: 300;
-}
-
 #card-container {
     height: 100vh;
     overflow: auto;
@@ -70,25 +102,13 @@ html,body {
     font-weight: bold;
 }
 
-/* .card-body {
-    background-color: #CD5C5C;
-} */
-.card-text {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    /* border: 1px;
-    border-style: solid;
-    border-image: linear-gradient(to bottom, white); */
-    padding-left: 70px;
-    padding-right: 70px;
-    /* background-color: #CD5C5C; */
-    color: black;
-
-}
-
 .rest-img {
     height: 100%;
+    width: 100%;
+}
+
+#rest-results-main {
+    flex-direction: row-reverse;
 }
 
 #spinner {
@@ -157,14 +177,8 @@ html,body {
     color: #738533;
 }
 
-.navbar{
-    position: fixed;
-    width: 100%;
-    z-index: 10;
-
-}
 .green-link, .green-link:hover{
-    color: #188753;
+    color: #2f8b5f;
     text-decoration: none;
 }
 
@@ -244,5 +258,28 @@ footer {
 @media screen and (max-width: 600px) {
     #menu-items-list {
         padding: 5%;
+    }
+
+    #main-logo-card {
+        width: 100%;
+    }
+
+    #main-card-tagline {
+        flex-wrap: wrap;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+
+    #card-container .display-dish-count {
+        top: auto;
+        bottom: 70px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #main-logo-card {
+        width: 80%;
     }
 }

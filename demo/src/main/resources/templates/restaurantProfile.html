@@ -5,7 +5,8 @@
         <div th:replace ="fragments/navigator::nav"></div>
         <div class="wrapper">
           <main class="container" th:if="${restaurant == null}">
-              <h1 class="text-center">Error. Nothing here to show.</h1>
+              <h1 class="text-center" style="margin-top: 100px;">Unable to render restaurant details</h1>
+              <p class="lead text-center">Go back to <a href="/search" class="green-link">search</a></p>
           </main>
           <main class="container" th:unless="${restaurant == null}" style="margin-top: 100px;">
               <div id ="restDetails" class="d-flex">

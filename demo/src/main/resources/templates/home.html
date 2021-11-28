@@ -4,57 +4,36 @@
     <body>
         <div th:replace ="fragments/navigator::nav"></div>
         <div class="wrapper">
-            <main>
-                <div class="container text-center" style="margin-top: 5%; margin-bottom: 2%;">
-                    <h1 class="display-1">WEET</h1>
-                    <p class="lead">Food for the People.</p>
+            <main class="container">
+                <div class="text-center" style="margin-top: 5%; margin-bottom: 2%;">
+                    <h1 id="main-logo-heading" class="display-1">weet</h1>
+                    <p class="lead">Food for the People</p>
                 </div>
 
-                <div class="container text-center">
-                    <div class="col">
-                    <div class="card h-100">
-                        
-                        <img th:src="@{images/landingPageImage.jpg}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title text-center">Dietary restrictions made easier for you. Take a look below to get started.</h5>
-                        <!-- <div class="card-text">Gluten-Free  |  Nut-Free  |  Kosher  |  Celiac's  |  Halal</p> -->
-                        <div class="card-text">
-                        <div>Gluten-Free</div>
-                        <div>|</div>
-                        <div>Nut-Free</div>
-                        <div>|</div>
-                        <div>Kosher</div>
-                        <div>|</div>
-                        <div>Celiac's</div>
-                        <div>|</div>
-                        <div>Halal</div>
-                        
+                <div id = "main-logo-card" class="card">
+                    <img th:src="@{images/landingPageImage.jpg}" class="card-img-top" alt="main-image">
+                    <div class="card-body">
+                        <h5 class="card-title text-center" style="margin: 10px 0 30px 0;">Dietary Restrictions Made 
+                            <span style="color: #8ba579; font-style: italic;">Easy</span>
+                            <img th:src="@{images/leaf.png}" alt="" width="35" height="35">
+                        </h5>
+                        <div id = "main-card-tagline" class="d-flex justify-content-around">
+                            <p>Gluten-Free</p>
+                            <p>|</p>
+                            <p>Nut-Free</p>
+                            <p>|</p>
+                            <p>Fish-Free</p>
+                            <p>|</p>
+                            <p>Vegan</p>
+                            <p>|</p>
+                            <p>Vegetarian</p>
                         </div>
                     </div>
-                    </div>
-                    <!-- <div class="col">
-                    <div class="card h-100">
-                        <img th:src="@{images/img-placeholder.jpeg}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                        <h5 class="card-title text-center">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="col">
-                        <div class="card h-100">
-                        <img th:src="@{images/img-placeholder.jpeg}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        </div>
-                        </div> -->
-                    <!-- </div> -->
                 </div>
 
-                <div class="container text-center">
+                <div class="text-center">
                     <a href="/login">
-                        <button type="button" class="btn btn-outline-info" style="margin: 50px 0;">Get Started</button>
+                        <button type="button" id = "get-started-btn" style="margin: 50px 0;">Get Started</button>
                     </a>
                 </div>
             </main>
