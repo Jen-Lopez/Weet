@@ -20,6 +20,7 @@ public class RestaurantDetailsController {
     public String RestaurantSearch(Model model) {
         if (rest != null) {
             model.addAttribute("restaurant", rest);
+            model.addAttribute("yelp", rest.getYelpData());
         }
         rest = null;
         return "restaurantProfile";

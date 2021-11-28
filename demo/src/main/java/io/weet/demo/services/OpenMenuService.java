@@ -1,11 +1,14 @@
 package io.weet.demo.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import io.weet.demo.models.Dish;
 import io.weet.demo.models.Menu;
 import io.weet.demo.models.Restaurant;
+import io.weet.demo.models.YelpInfo;
+
 import java.util.*;
 import org.json.*;
 import java.net.http.*;
@@ -14,6 +17,8 @@ import java.net.URI;
 
 @Service
 public class OpenMenuService {
+    @Autowired
+    YelpService yelpService;
 
     @Value("${API_KEY}")
     private String API_KEY;
@@ -161,6 +166,12 @@ public class OpenMenuService {
             }
         }
         newRestaurant.setMenu(menu);
+
+        YelpInfo data = yelpService.fetchReviewsWrapper(newRestaurant.getRestName().replace(" ", "%20"), newRestaurant.getLat(), newRestaurant.getLong());
+        if ((data.getRestName().toLowerCase()).contains((newRestaurant.getRestName()).toLowerCase())) {
+            newRestaurant.setYelpData(data);
+        }
+
         return newRestaurant;
     }
 
