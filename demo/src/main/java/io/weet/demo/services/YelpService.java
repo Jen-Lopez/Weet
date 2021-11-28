@@ -50,6 +50,10 @@ public class YelpService {
         yelpData.setID(result.getString("id"));
         yelpData.setName(result.getString("name"));
 
+        if (result.has("rating")){
+            yelpData.setRate(String.valueOf(result.getNumber("rating")));
+        }
+
         if (result.has("price")){
             yelpData.setPrice(result.getString("price"));
         }

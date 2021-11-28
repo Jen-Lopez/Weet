@@ -17,8 +17,8 @@
                   <div style="padding-right: 20px;">
                     <p style="margin-top: 30px;">
                       <span class="fw-bold">Price Range:</span>
-                      <span th:if="${yelp.getPriceRange() == ''}">Not Available</span>
-                      <span th:unless="${yelp.getPriceRange() == null}" th:text="${yelp.getPriceRange()}"></span>
+                      <span th:if="${yelp?.getPriceRange()}" th:text="${yelp.getPriceRange()}"></span>
+                      <span th:unless="${yelp?.getPriceRange()}">Not Available</span>
                     </p>
                     <p>
                         <span class="fw-bold">Description:</span>
@@ -43,13 +43,14 @@
                     </p>
                   </div>
                   <div class="flex-grow-1 text-center">
-                      <img th:src="@{images/rest-placeholder.jpeg}" class="img-fluid rounded-start rest-img" alt="...">
+                      <img th:if="${yelp?.getImageURL()}" th:src="${yelp.getImageURL()}" class="img-fluid rounded-start rest-details-img" alt="...">
+                      <img th:unless="${yelp?.getImageURL()}" th:src="@{images/rest-placeholder.jpeg}" class="img-fluid rounded-start rest-details-img" alt="...">
                   </div>
               </div>
 
               <div id="menu-items">
                 <div>
-                  <h2 class="display-6 menu-type-head">Your Dishes</h2>
+                  <h2 class="display-6 sub-type-head">Your Dishes</h2>
                   <div th:replace ="fragments/menuCard::menu(menuItems=${restaurant.getUserItems()})"></div>
                 </div>
                 <div>
@@ -57,6 +58,39 @@
                     <button id = "full-menu" type="button" class="btn btn-secondary">View Full Menu</button>
                   </div>
                   <div th:replace ="fragments/menuList::menu(restaurant=${restaurant})"></div>
+                </div>
+              </div>
+
+              <div>
+                <h2 class="display-6 sub-type-head">Reviews 
+                  <span th:if="${yelp?.getOverallRate()}" th:text="'(' + ${yelp.getOverallRate()} + ')'"></span>
+                  <span th:unless="${yelp?.getOverallRate()}">(0)</span>
+                  <span th:if="${yelp?.getYelpURL()}">
+                    <a th:href="${yelp.getYelpURL()}" target="_blank"><img data-bs-toggle="tooltip" data-bs-placement="top" title="More Reviews" th:src="@{images/yelp.svg}" width="35px"></a>
+                  </span>
+                </h2>
+                <div id="user-reviews" class="card-group" th:if="${yelp?.getReviews()}">
+                    <div class="card border-secondary"  th:each="review:${yelp.getReviews()}">
+                      <div class="card-header">
+                        <span>Rating:</span> 
+                        <span th:text="${review.getRate()}"></span>
+                      </div>
+                      <div class="card-body text-secondary">
+                        <blockquote class="blockquote mb-0">
+                          <p> 
+                            <span  th:text="${review.getReview()}"></span>
+                            <a class = "read-more green-link" th:href="${review.getReviewUrl()}" target="_blank">(Read more)</a>
+                          </p>
+                          <footer class="blockquote-footer"> <cite title="Source Title" th:text="${review.getReviewer()}"></cite></footer>
+                        </blockquote>
+                      </div>
+                      <div class="card-footer">
+                        <small class="text-muted" th:text="${'Review on ' + review.getTimeStamp()}"></small>
+                      </div>
+                  </div>
+                </div>
+                <div id="user-reviews" th:unless="${yelp?.getReviews()}">
+                  No Reviews Found.
                 </div>
               </div>
 

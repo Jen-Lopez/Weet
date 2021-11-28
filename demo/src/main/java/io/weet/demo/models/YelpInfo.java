@@ -8,6 +8,7 @@ public class YelpInfo {
     private String imageURL;
     private String priceRange;
     private String yelpURL;
+    private String overallRating;
     private ArrayList<YelpReview> listofReviews = new ArrayList<>();
 
     public String getRestName() {
@@ -34,6 +35,10 @@ public class YelpInfo {
         return yelpURL;
     }
 
+    public String getOverallRate() {
+        return overallRating;
+    }
+
     public void setName(String name) {
         this.restName = name;
     }
@@ -52,6 +57,10 @@ public class YelpInfo {
 
     public void setYelpURL(String url) {
         this.yelpURL = url;
+    }
+
+    public void setRate(String rate) {
+        this.overallRating = rate;
     }
 
     public void setReviews(ArrayList<YelpReview> reviews) {
