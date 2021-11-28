@@ -15,27 +15,32 @@
             </div>
               <div id ="restDetails" class="d-flex">
                   <div style="padding-right: 20px;">
-                        <p  style="margin-top: 30px;">
-                            <span class="fw-bold">Description:</span>
-                            <span th:if="${restaurant.getRestDescription() == ''}">Not Available</span>
-                            <span th:unless="${restaurant.getRestDescription() == ''}" th:text="${restaurant.getRestDescription()}"></span>
-                        </p>
-                        <p>
-                            <span class="fw-bold">Address:</span>
-                            <span th:if="${restaurant.getRestAddress() == ''}">Not Available</span>
-                            <span th:unless="${restaurant.getRestAddress() == ''}" th:text="${restaurant.getRestAddress() + ' ' + restaurant.getCity() + ', ' + restaurant.getState() + ' ' + restaurant.getZip()}"></span>
-                            <span th:unless="${restaurant.getRestAddress() == ''}" >(<a th:href="'https://www.google.com/maps/place/'+${restaurant.getRestAddress()}" target="_blank">Directions</a>)</span>
-                        </p>
-                        <p>
-                            <span class="fw-bold">Website:</span>
-                            <span th:if="${restaurant.getRestSite() == ''}">Not Available</span>
-                            <a th:unless="${restaurant.getRestSite() == ''}" th:href="${restaurant.getRestSite()}" th:text="${restaurant.getRestSite()}" target="_blank"></a>
-                        </p>
-                        <p>
-                            <span class="fw-bold">Phone:</span>
-                            <span th:if="${restaurant.getPhone() == ''}">Not Available</span>
-                            <span th:unless="${restaurant.getPhone() == null}" th:text="${restaurant.getPhone()}"></span>
-                        </p>
+                    <p style="margin-top: 30px;">
+                      <span class="fw-bold">Price Range:</span>
+                      <span th:if="${yelp.getPriceRange() == ''}">Not Available</span>
+                      <span th:unless="${yelp.getPriceRange() == null}" th:text="${yelp.getPriceRange()}"></span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Description:</span>
+                        <span th:if="${restaurant.getRestDescription() == ''}">Not Available</span>
+                        <span th:unless="${restaurant.getRestDescription() == ''}" th:text="${restaurant.getRestDescription()}"></span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Address:</span>
+                        <span th:if="${restaurant.getRestAddress() == ''}">Not Available</span>
+                        <span th:unless="${restaurant.getRestAddress() == ''}" th:text="${restaurant.getRestAddress() + ' ' + restaurant.getCity() + ', ' + restaurant.getState() + ' ' + restaurant.getZip()}"></span>
+                        <span th:unless="${restaurant.getRestAddress() == ''}" >(<a th:href="'https://www.google.com/maps/place/'+${restaurant.getRestAddress()}" target="_blank">Directions</a>)</span>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Website:</span>
+                        <span th:if="${restaurant.getRestSite() == ''}">Not Available</span>
+                        <a th:unless="${restaurant.getRestSite() == ''}" th:href="${restaurant.getRestSite()}" th:text="${restaurant.getRestSite()}" target="_blank"></a>
+                    </p>
+                    <p>
+                        <span class="fw-bold">Phone:</span>
+                        <span th:if="${restaurant.getPhone() == ''}">Not Available</span>
+                        <span th:unless="${restaurant.getPhone() == null}" th:text="${restaurant.getPhone()}"></span>
+                    </p>
                   </div>
                   <div class="flex-grow-1 text-center">
                       <img th:src="@{images/rest-placeholder.jpeg}" class="img-fluid rounded-start rest-img" alt="...">

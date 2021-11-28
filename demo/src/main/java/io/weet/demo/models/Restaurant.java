@@ -15,6 +15,7 @@ public class Restaurant {
     private String phone;
     private String latitude;
     private String longitude;
+    private YelpInfo yelpData;
     private Menu menu;
     private ArrayList<Dish> userMenuItems;
 
@@ -74,6 +75,10 @@ public class Restaurant {
         return menu;
     }
 
+    public YelpInfo getYelpData() {
+        return yelpData;
+    }
+
     public ArrayList<Dish> getUserItems() {
         return userMenuItems;
     }
@@ -124,6 +129,10 @@ public class Restaurant {
 
     public void setLongitude(String lon) {
         this.longitude = lon;
+    }
+
+    public void setYelpData(YelpInfo data) {
+        this.yelpData = data;
     }
 
     public void setMenu(Menu menu) {
