@@ -214,6 +214,12 @@ html,body {
 }
 
 /* USER PROFILE */
+
+.dropdown-menu {
+    left: auto!important;
+    right: 0;
+}
+
 #add-allergen {
     margin-top: 10px;
 }

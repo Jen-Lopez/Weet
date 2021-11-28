@@ -1,11 +1,23 @@
 <!DOCTYPE HTML>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <body>
         <nav class="navbar sticky-top navbar-light bg-light" th:fragment="nav">
             <div class="container">
               <a class="navbar-brand" href="/">
-                <img th:src="@{images/logo.png}" alt="" width="35" height="35">
+                <img th:src="@{images/logo.png}" alt="logo brand" width="35" height="35">
               </a>
+
+              <div class="dropdown" sec:authorize="isAuthenticated()">
+                <div class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img  th:src="@{images/user.png}" alt="user-icon" width="30px">
+                </div>
+              
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" href="/user">My Profile</a></li>
+                  <li><a class="dropdown-item" th:href="@{/logout}">Logout</a></li>
+                </ul>
+              </div>
             </div>
         </nav>
     </body>
