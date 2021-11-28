@@ -9,10 +9,12 @@
               <p class="lead text-center">Go back to <a href="/search" class="green-link">search</a></p>
           </main>
           <main class="container" th:unless="${restaurant == null}" style="margin-top: 100px;">
+            <div>
+              <h1 class="display-3 text-center" th:text="${restaurant.getRestName()}"></h1>
+              <p class="lead text-center" th:if="${restaurant.getRestCuisine() != null}" th:text="${restaurant.getRestCuisine()}"></p>
+            </div>
               <div id ="restDetails" class="d-flex">
                   <div style="padding-right: 20px;">
-                        <h1 class="display-3 text-center" th:text="${restaurant.getRestName()}"></h1>
-                        <p class="lead text-center" th:if="${restaurant.getRestCuisine() != null}" th:text="${restaurant.getRestCuisine()}"></p>
                         <p  style="margin-top: 30px;">
                             <span class="fw-bold">Description:</span>
                             <span th:if="${restaurant.getRestDescription() == ''}">Not Available</span>

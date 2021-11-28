@@ -104,7 +104,6 @@ html,body {
 
 .rest-img {
     height: 100%;
-    width: 100%;
 }
 
 #rest-results-main {
@@ -117,6 +116,10 @@ html,body {
 
 #spinner > div {
     margin-top: 5px;
+}
+
+#restDetails {
+    margin-top: 50px;
 }
 
 #restDetails a {
@@ -255,7 +258,7 @@ footer {
     clear: both;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
     #menu-items-list {
         padding: 5%;
     }
@@ -266,6 +269,10 @@ footer {
 
     #main-card-tagline {
         flex-wrap: wrap;
+    }
+
+    #restDetails  {
+        flex-direction: column-reverse;
     }
 
 }
