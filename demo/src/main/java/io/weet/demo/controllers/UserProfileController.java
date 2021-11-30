@@ -1,5 +1,6 @@
 package io.weet.demo.controllers;
 import io.weet.demo.models.Allergen;
+import io.weet.demo.models.DietaryRestriction;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class UserProfileController {
     private Map<String, Allergen> allergenList = new HashMap<>();
+    private Map<String, DietaryRestriction> dietaryRestrictionList = new HashMap<>();
 
     // fetch this from DB
     @PostConstruct
@@ -25,11 +27,17 @@ public class UserProfileController {
 
         allergenList.put(emp1.getAllergen(), emp1);
         allergenList.put(emp2.getAllergen(), emp2);
+        DietaryRestriction ex1 = new DietaryRestriction("Vegan");
+        DietaryRestriction ex2 = new DietaryRestriction("Gluten Free");
+        dietaryRestrictionList.put(ex1.getDietaryRestriction(), ex1);
+        dietaryRestrictionList.put(ex2.getDietaryRestriction(), ex2);
     }
 
     @GetMapping("/user")
     public String userProfile(Model model) {
         model.addAttribute("allergenList", new ArrayList<>(allergenList.values()));
+        model.addAttribute("dietaryRestrictionList", new ArrayList<>(dietaryRestrictionList.values()));
+
         return "userProfile";
     }
     
@@ -44,6 +52,19 @@ public class UserProfileController {
     @PostMapping("/addAllergen")
     public String addAllergen(@RequestParam(name = "name") String name) {
         allergenList.put(name, new Allergen(name));
+        return "redirect:/user";   
+    }
+    @PostMapping("/dietaryRestrictionDelete")
+    public String dietaryRestrictionDelete(@RequestParam(name = "name") String name) {
+        if (dietaryRestrictionList.containsKey(name)) {
+            dietaryRestrictionList.remove(name);
+        }
+        return "redirect:/user";   
+    }
+
+    @PostMapping("/addDietaryRestriction")
+    public String addDietaryRestriction(@RequestParam(name = "name") String name) {
+        dietaryRestrictionList.put(name, new DietaryRestriction(name));
         return "redirect:/user";   
     }
 }

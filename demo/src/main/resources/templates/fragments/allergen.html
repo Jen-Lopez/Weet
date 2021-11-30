@@ -56,4 +56,60 @@
             </div>
         </div>
     </div>
+    <div th:fragment="dietaryRestrictionList(dietaryRestrictions)">
+        <div class="container">
+            <table id="dietaryRestriction-list" class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Dietary Restrictions</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr th:each="all:${dietaryRestrictions}">
+                        <td class="d-flex justify-content-between">
+                            <div>
+                                <span class ="dietaryRestriction-name" th:text="${all.getDietaryRestriction()}"></span>
+                            </div>
+                            <div>
+                                <form th:action="@{/dietaryRestrictionDelete}" method="post">
+                                    <input type="hidden" name="name" th:value="${all.getDietaryRestriction()}">
+                                    <button type="submit" class="btn btn-secondary">Delete</button>
+                                </form>
+                            </div>
+                         </td>                    
+                     </tr>
+                     
+                </tbody>
+            
+            </table>
+             <!-- Button trigger modal -->
+            <div class="text-end">
+                <button id="add-dietaryRestriction" type="button" class="btn btn-success addDietaryRestriction" data-bs-toggle="modal" data-bs-target="#allergenmodal">
+                    Add Dietary Restriction
+                </button>
+            </div>
+           
+
+        <!-- MODAL -->
+        <div class="modal fade" id="dietaryRestrictionmodal" tabindex="-1" aria-labelledby="addDietaryRestriction" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class=“modal-title” id=“addDietaryRestriction” >Enter Dietary Restriction</h5>                       
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id = "dietaryRestriction-form" th:action="@{/addDietaryRestriction}" method="post">
+                            <input id="dietaryRestriction-search" type="text" class="form-control" name="name" required placeholder='"Vegan"'/>
+                            <div id ="results"></div>
+                            <div class="text-end">
+                                <button id="save-dietaryRestriction" type="submit" class="btn btn-success" disabled>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </html>
