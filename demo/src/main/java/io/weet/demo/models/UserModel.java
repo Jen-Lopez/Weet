@@ -56,6 +56,10 @@ public class UserModel {
         }
     }
 
+    public void setAllergens(List<Allergen> al){
+        allergens = al;
+    }
+
     public String toString() {
         return String.format(
                 "User[id=%s, fullname='%s', email='%s']",
