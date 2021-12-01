@@ -7,6 +7,7 @@
             <main style="margin-top: 100px;">
                     <h1 class="display-3 text-center"> User Profile </h1>
                     <div th:replace ="fragments/allergen::allergenList(allergens=${allergenList})"></div>  
+                    <div th:replace ="fragments/restriction::dietaryRestrictionList(dietaryRestrictions=${dietaryRestrictionList})"></div>  
                     <div class="text-center">
                         <a href="/search">
                             <button type="button" class="btn btn-dark" style="margin-top: 80px;">Begin Search</button>
