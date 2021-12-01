@@ -44,13 +44,13 @@ public class UserModel {
 
     public void addAllergy(String name){
         Allergen alg = new Allergen(name);
-        add = allergens.add(alg);
+        add = allergens.add(alg); //adds allergy to allergy list with name specified in method signature
     }
 
     public void deleteAllergy(String name){
         for (int i = 0; i < allergens.size(); i++){
             if (allergens.get(i).getAllergen().equalsIgnoreCase(name)){
-                allergens.remove(i); 
+                allergens.remove(i); //just remove the allergy from Alelrgy list with the name specified in the method signature
                 break;
             }
         }
