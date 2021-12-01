@@ -13,6 +13,7 @@ public class UserModel {
     private String email;
     private String password;
     private List<Allergen> allergens;
+    private boolean add;
 
     public UserModel(String name, String email, String password, List<Allergen> allergens) {
         this.name = name;
@@ -39,6 +40,20 @@ public class UserModel {
 
     public void setPassword(String pwd) {
         this.password = pwd;
+    }
+
+    public void addAllergy(String name){
+        Allergen alg = new Allergen(name);
+        add = allergens.add(alg);
+    }
+
+    public void deleteAllergy(String name){
+        for (int i = 0; i < allergens.size(); i++){
+            if (allergens.get(i).getAllergen().equalsIgnoreCase(name)){
+                allergens.remove(i); 
+                break;
+            }
+        }
     }
 
     public String toString() {
