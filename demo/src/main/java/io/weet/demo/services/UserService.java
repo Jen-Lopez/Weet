@@ -49,4 +49,18 @@ public class UserService implements UserServiceInterface {
         return new User(user.getEmail(), user.getPassword(), authorities);
     }
 
+    //add allergen and updates it to the user object in the database
+
+    public UserModel addAllergen(String email, String allergenName){
+
+        UserModel user = userRepository.findByEmail(email); //gets the user in question
+
+        user.addAllergy(allergenName); //updates user's list of allergens by adding it
+
+        return user;
+
+    }
+
+
+
 }

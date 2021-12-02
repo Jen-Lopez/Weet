@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,6 +59,7 @@ public class UserProfileController {
     @PostMapping("/addAllergen")
     public String addAllergen(@RequestParam(name = "name") String name) {
         allergenList.put(name, new Allergen(name));
+        userService.loadUserByUsername(user.getName());
         return "redirect:/user";   
     }
     @PostMapping("/dietaryRestrictionDelete")
