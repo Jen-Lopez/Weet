@@ -237,19 +237,19 @@ html,body {
     right: 0;
 }
 
-#add-allergen {
+#add-allergen, #add-dietaryRestriction {
     margin-top: 10px;
 }
 
-#allergen-list {
+#allergen-list, #dietaryRestriction-list {
     margin-top: 50px;
 }
 
-.allergen-name {
+.allergen-name, .dietaryRestriction-name {
     font-weight: 300;
 }
 
-#save-allergen {
+#save-allergen, #save-dietaryRestriction {
     margin-top: 30px;
 }
 
@@ -259,7 +259,7 @@ html,body {
     margin: auto;
 }
 
-#allergen-form > #results {
+#allergen-form > #results, #dietaryRestriction-form > #results-dr {
     position: absolute;
     width: 100%;
     background-color: white;
@@ -267,7 +267,7 @@ html,body {
     z-index: 10;
 }
 
-#allergen-form {
+#allergen-form, #dietaryRestriction-form {
     position: relative;
 }
 

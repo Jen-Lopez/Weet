@@ -29,7 +29,7 @@
             </table>
             <!-- Button trigger modal -->
             <div class="text-end">
-                <button id="add-dietaryRestriction" type="button" class="btn btn-success addDietaryRestriction" data-bs-toggle="modal" data-bs-target="#allergenmodal">
+                <button id="add-dietaryRestriction" type="button" class="btn btn-success addDietaryRestriction" data-bs-toggle="modal" data-bs-target="#dietaryRestrictionmodal">
                     Add Dietary Restriction
                 </button>
             </div>
@@ -46,7 +46,7 @@
                         <div class="modal-body">
                             <form id = "dietaryRestriction-form" th:action="@{/addDietaryRestriction}" method="post">
                                 <input id="dietaryRestriction-search" type="text" class="form-control" name="name" required placeholder='"Vegan"'/>
-                                <div id ="results"></div>
+                                <div id ="results-dr"></div>
                                 <div class="text-end">
                                     <button id="save-dietaryRestriction" type="submit" class="btn btn-success" disabled>Save</button>
                                 </div>

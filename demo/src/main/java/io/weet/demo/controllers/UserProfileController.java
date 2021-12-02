@@ -22,15 +22,8 @@ public class UserProfileController {
     // fetch this from DB
     @PostConstruct
     private void loadData(){
-        Allergen emp1= new Allergen("Peanuts");
-        Allergen emp2= new Allergen("Eggs");
-
-        allergenList.put(emp1.getAllergen(), emp1);
-        allergenList.put(emp2.getAllergen(), emp2);
         DietaryRestriction ex1 = new DietaryRestriction("Vegan");
-        DietaryRestriction ex2 = new DietaryRestriction("Gluten Free");
         dietaryRestrictionList.put(ex1.getDietaryRestriction(), ex1);
-        dietaryRestrictionList.put(ex2.getDietaryRestriction(), ex2);
     }
 
     @GetMapping("/user")
