@@ -6,6 +6,8 @@ import io.weet.demo.services.OpenMenuService;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,16 +22,30 @@ public class RestaurantSearchController {
 
     boolean madeFirstSearch;
 
+    ArrayList<String> allergens = new ArrayList<>();
+    ArrayList<String> restrictions = new ArrayList<>();
+
+    @PostConstruct
+    public void loadRestrictions() {
+        allergens.add("cheese");
+        allergens.add("dairy");
+        allergens.add("milk");
+        restrictions.add("vegan");
+    }
+
     @GetMapping("/search")
     public String RestaurantSearch(Model model) {
         List<Restaurant> results = new ArrayList<>(openMenuService.getResults().values());
         model.addAttribute("results", results);
         model.addAttribute("processed", madeFirstSearch);
+        model.addAttribute("allergens", allergens);
+        model.addAttribute("restrictions", restrictions);
         return "restaurantSearch";
     }
 
     @GetMapping("/getRestaurants")
-    public String RestaurantSearchResults(@RequestParam(name = "city") String city, @RequestParam(name = "state") String state, @RequestParam(name = "nbhood") String nbhood, @RequestParam(name = "zip") String zip, @RequestParam(name = "lat") String latCoords, @RequestParam(name = "long") String longCoords) {
+    public String RestaurantSearchResults(@RequestParam(name = "city") String city, @RequestParam(name = "state") String state, @RequestParam(name = "nbhood") String nbhood, @RequestParam(name = "zip") String zip, @RequestParam(name = "lat") String latCoords, @RequestParam(name = "long") String longCoords, @RequestParam(name = "restriction") String query) {
+        // System.out.println("query is " + query);
         openMenuService.setCoordinates("lat", Float.parseFloat(latCoords));
         openMenuService.setCoordinates("long", Float.parseFloat(longCoords));
 

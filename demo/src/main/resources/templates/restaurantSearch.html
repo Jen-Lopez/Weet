@@ -35,18 +35,30 @@
                                     Restriction
                                 </button>
 
-                                <ul id = "form-search-restrictions" class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1" >
+                                <ul id = "form-search-restrictions" class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
                                     <li><h6 class="dropdown-header">Allergens</h6></li>
-                                    <span class="restriction-input">
-                                        <input type="radio" name="restriction" value="nuts" style="display:none"/>
-                                        <li><a class="dropdown-item" href="#">Nuts</a></li>
-                                    </span>
+                                    <div th:if="!${#lists.isEmpty(allergens)}">
+                                        <span th:each="all:${allergens}" class="restriction-input">
+                                            <input type="radio" name="restriction" th:value="${all}" style="display:none"/>
+                                            <li><a class="dropdown-item" href="#" th:text="${all}"></a></li>
+                                        </span> 
+                                    </div>
+                                    <div th:if="${#lists.isEmpty(allergens)}">
+                                       You don't have any Allergens
+                                    </div>
+
                                     <li><hr class="dropdown-divider"></li>
                                     <li><h6 class="dropdown-header">Dietary Restrictions</h6></li>
-                                    <span class="restriction-input">
-                                        <input type="radio" name="restriction" value="vegan" style="display:none"/>
-                                        <li><a class="dropdown-item" href="#">Vegan</a></li>
-                                    </span>
+
+                                    <div  th:if="!${#lists.isEmpty(restrictions)}">
+                                        <span  th:each="res:${restrictions}" class="restriction-input">
+                                            <input type="radio" name="restriction" th:value="${res}" style="display:none"/>
+                                            <li><a class="dropdown-item" href="#" th:text="${res}"></a></li>
+                                        </span>  
+                                    </div>
+                                    <div th:if="${#lists.isEmpty(restrictions)}">
+                                       You don't have any restrictions
+                                    </div>
                                    
                                 </ul>
                             </div>

@@ -75,10 +75,6 @@ html,body {
     margin: auto;
 }
 
-#search #search-row {
-    height: 10vh;
-}
-
 #restriction-alert {
     visibility: hidden;
     margin-bottom: 50px;

@@ -13,7 +13,8 @@
             event.preventDefault();
             event.stopPropagation();
           }
-          else if(dropdown) {
+          
+          if(dropdown) {
             let choice = dropdown.querySelector("input[name = 'restriction']:checked");
             
             if (!choice) {
@@ -29,9 +30,9 @@
               return;
             }
           }
-          else {
-              loader();
-          }
+
+          loader();
+          
           form.classList.add('was-validated');
         }, false);
       });
