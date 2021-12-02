@@ -9,8 +9,11 @@
                     <div th:replace ="fragments/allergen::allergenList(allergens=${allergenList})"></div>  
                     <div th:replace ="fragments/restriction::dietaryRestrictionList(dietaryRestrictions=${dietaryRestrictionList})"></div>  
                     <div class="text-center">
-                        <a href="/search">
+                        <a th:if="${not #lists.isEmpty(allergenList) OR not #lists.isEmpty(dietaryRestrictionList)}" href="/search">
                             <button type="button" class="btn btn-dark" style="margin-top: 80px;">Begin Search</button>
+                        </a>
+                        <a th:unless="${not #lists.isEmpty(allergenList) OR not #lists.isEmpty(dietaryRestrictionList)}" href="/search">
+                            <button type="button" class="btn btn-dark" style="margin-top: 80px;" disabled>Begin Search</button>
                         </a>
                     </div>
             </main>

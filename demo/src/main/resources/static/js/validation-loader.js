@@ -7,9 +7,27 @@
       // Loop over them and prevent submission
       var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
+          const dropdown = document.getElementById("form-search-restrictions");
+
           if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
+          }
+          else if(dropdown) {
+            let choice = dropdown.querySelector("input[name = 'restriction']:checked");
+            
+            if (!choice) {
+              event.preventDefault();
+              event.stopPropagation();
+              const alert = document.getElementById("restriction-alert");
+              alert.classList.add("showAlert");
+
+              setTimeout(function() {
+                alert.classList.remove("showAlert");
+              }, 2200);
+
+              return;
+            }
           }
           else {
               loader();

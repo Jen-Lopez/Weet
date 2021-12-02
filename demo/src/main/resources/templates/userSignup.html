@@ -39,18 +39,18 @@
                         <div class="mb-3 row justify-content-center">
                             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" id="inputEmail" name="email" placeholder="email@example.com" required>
+                                <input type="text" class="form-control" id="inputEmail" name="email" placeholder="email@example.com" required minlength="3">
                                 <div class="invalid-feedback">
-                                Email is required
+                                Provide a valid email 3+ characters long
                                 </div>
                             </div>
                         </div>
                         <div class="mb-3 row justify-content-center">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-md-4">
-                                <input type="password" class="form-control" name="password" id="inputPassword" required>
+                                <input type="password" class="form-control" name="password" id="inputPassword" required minlength="5">
                                 <div class="invalid-feedback">
-                                    Password is required
+                                    Provide a valid password 5+ characters long
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,5 @@
 package io.weet.demo.repositories;
 
-import org.apache.catalina.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

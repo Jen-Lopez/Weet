@@ -61,10 +61,6 @@ html,body {
     padding-bottom: 20px;
 }
 
-#filter-options .dropdown {
-    margin-right: 12px;
-}
-
 #filter-options .dropdown .btn {
     background-color: #639977;
     color: white;
@@ -77,6 +73,19 @@ html,body {
 #filter-options .dropdown-item {
     padding: 0;
     margin: auto;
+}
+
+#search #search-row {
+    height: 10vh;
+}
+
+#restriction-alert {
+    visibility: hidden;
+    margin-bottom: 50px;
+}
+
+.showAlert {
+    visibility: visible!important;
 }
 
 #card-container {
@@ -281,6 +290,24 @@ footer {
     clear: both;
 }
 
+.active, .dropdown-item:active {
+    background-color: #9ba9a0!important;
+}
+
+@media screen and (max-width: 450px) {
+    #search #search-row  > div{
+        flex-direction: column;
+    }
+
+    #search #search-row {
+        padding: 30px 0;
+    }
+
+    #search {
+        margin-top: 0px;
+    }
+}
+
 @media screen and (max-width: 650px) {
     #menu-items-list {
         padding: 5%;
@@ -310,6 +337,11 @@ footer {
     #card-container .card,  #card-container .card .row {
         height: auto;
     }
+
+    #search #search-row {
+        height: 30vh;
+    }
+
 }
 
 @media screen and (max-width: 1200px) {
