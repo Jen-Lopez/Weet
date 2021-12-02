@@ -42,8 +42,14 @@ public class YelpService {
             .build();
         System.out.println("GETTING RELEVANT YELP RESULTS....");
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-        
+        System.out.println(httpResponse.body());
+
         JSONObject root = new JSONObject(httpResponse.body());
+        if (root.has("total") && root.getInt("total") == 0) {
+            System.out.println("IS EMPTY");
+            return new YelpInfo();
+        }
+
         JSONObject result = root.getJSONArray("businesses").getJSONObject(0);
 
         YelpInfo yelpData = new YelpInfo();
@@ -85,6 +91,12 @@ public class YelpService {
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         
         JSONObject root = new JSONObject(httpResponse.body());
+        if (root.has("total") && root.getInt("total") == 0) {
+            System.out.println("IS EMPTY");
+            return reviews;
+        }
+
+        System.out.println(httpResponse.body());
         JSONArray result = root.getJSONArray("reviews");
 
         for (int i = 0; i < result.length(); i++) {
