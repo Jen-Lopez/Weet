@@ -52,6 +52,7 @@ public class UserProfileController {
     public String allergenDelete(@RequestParam(name = "name") String name) {
         if (allergenList.containsKey(name)) {
             allergenList.remove(name);
+            
         }
         return "redirect:/user";   
     }
@@ -59,7 +60,6 @@ public class UserProfileController {
     @PostMapping("/addAllergen")
     public String addAllergen(@RequestParam(name = "name") String name) {
         allergenList.put(name, new Allergen(name));
-        userService.loadUserByUsername(user.getName());
         return "redirect:/user";   
     }
     @PostMapping("/dietaryRestrictionDelete")

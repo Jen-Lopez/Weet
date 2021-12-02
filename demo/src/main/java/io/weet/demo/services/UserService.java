@@ -61,6 +61,15 @@ public class UserService implements UserServiceInterface {
 
     }
 
+    public UserModel deleteAllergen(String email, String allergenName){
+        
+        UserModel user = userRepository.findByEmail(email);
+
+        user.deleteAllergy(allergenName);
+        return user;
+
+    }
+
 
 
 }
