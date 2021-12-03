@@ -56,6 +56,7 @@ public class UserService implements UserServiceInterface {
         UserModel user = userRepository.findByEmail(email); //gets the user in question
 
         user.addAllergy(allergenName); //updates user's list of allergens by adding it
+        userRepository.save(user);
 
         return user;
 
@@ -66,6 +67,8 @@ public class UserService implements UserServiceInterface {
         UserModel user = userRepository.findByEmail(email);
 
         user.deleteAllergy(allergenName);
+        userRepository.save(user);
+        
         return user;
 
     }
