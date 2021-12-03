@@ -23,6 +23,9 @@
                             </div>
                         </td>                    
                     </tr>
+                    <tr th:if="${#lists.isEmpty(dietaryRestrictions)}">
+                        <td class="text-center">No Restrictions Available</td>
+                    </tr>
                     
                 </tbody>
             

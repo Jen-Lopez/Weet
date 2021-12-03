@@ -33,8 +33,6 @@ public class UserProfileController {
     
     @PostConstruct
     private void loadData(){
-        DietaryRestriction ex1 = new DietaryRestriction("Vegan");
-        dietaryRestrictionList.put(ex1.getDietaryRestriction(), ex1);
     }
 
     @GetMapping("/user")

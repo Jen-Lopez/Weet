@@ -1,5 +1,6 @@
 package io.weet.demo.controllers;
 
+import io.weet.demo.models.Allergen;
 import io.weet.demo.models.Restaurant;
 import io.weet.demo.services.OpenMenuService;
 
@@ -22,13 +23,12 @@ public class RestaurantSearchController {
 
     boolean madeFirstSearch;
 
-    ArrayList<String> allergens = new ArrayList<>();
-    ArrayList<String> restrictions = new ArrayList<>();
+    ArrayList<Allergen> allergens;
+    ArrayList<Allergen> restrictions;
 
     @PostConstruct
     public void loadRestrictions() {
-        restrictions.add("Vegan");
-        restrictions.add("Vegetarian");
+
     }
 
     @GetMapping("/search")

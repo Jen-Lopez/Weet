@@ -4,7 +4,7 @@
     <body>
         <div th:replace ="fragments/navigator::nav"></div>
         <div class="wrapper">
-            <main class="container" style="margin-top: 50px;">
+            <main class="container" style="margin-top: 50px; height: 100vh;">
                 <div id = "restriction-alert" class="alert alert-danger" role="alert">
                     <strong>No Restriction Selected! </strong> You should check that field below.
                 </div>
@@ -16,7 +16,7 @@
 
                 <section id = "filter-options">
                     <form id = "search" class="needs-validation" novalidate th:action="@{/getRestaurants}" method="get">
-                        <div id = "search-row"class="row justify-content-center">
+                        <div id = "search-row" class="row justify-content-center">
                             <div class="col-md-5" >
                                 <input id = "autocomplete" class="form-control me-2" type="search" name="location" placeholder='Enter street address or zip code' aria-label="Search" required>
                                 <input id = "coordsLat" type="hidden" name="lat">

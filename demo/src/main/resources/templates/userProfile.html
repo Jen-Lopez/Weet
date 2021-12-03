@@ -5,17 +5,13 @@
         <div th:replace ="fragments/navigator::nav"></div>
         <div class="wrapper">
             <main style="margin-top: 100px;">
-                    <h1 class="display-3 text-center"> User Profile </h1>
-                    <div th:replace ="fragments/allergen::allergenList(allergens=${allergenList})"></div>  
-                    <div th:replace ="fragments/restriction::dietaryRestrictionList(dietaryRestrictions=${dietaryRestrictionList})"></div>  
-                    <div class="text-center">
-                        <a th:if="${not #lists.isEmpty(allergenList) OR not #lists.isEmpty(dietaryRestrictionList)}" href="/search">
-                            <button type="button" class="btn btn-dark" style="margin-top: 80px;">Begin Search</button>
-                        </a>
-                        <a th:unless="${not #lists.isEmpty(allergenList) OR not #lists.isEmpty(dietaryRestrictionList)}" href="/search">
-                            <button type="button" class="btn btn-dark" style="margin-top: 80px;" disabled>Begin Search</button>
-                        </a>
-                    </div>
+                <h1 class="display-3 text-center"> User Profile </h1>
+                <div th:replace ="fragments/allergen::allergenList(allergens=${allergenList})"></div>  
+                <div th:replace ="fragments/restriction::dietaryRestrictionList(dietaryRestrictions=${dietaryRestrictionList})"></div>  
+                <div class="text-center" style="margin-top: 80px;">
+                    <a href="/search" class="btn btn-secondary" th:if="${not #lists.isEmpty(allergenList) OR not #lists.isEmpty(dietaryRestrictionList)}">Begin Search</a>
+                    <a href="/search" class="btn btn-secondary disabled" th:unless="${not #lists.isEmpty(allergenList) OR not #lists.isEmpty(dietaryRestrictionList)}" >Begin Search</a>
+                </div>
             </main>
         </div>
         <div th:replace ="fragments/footer::footer"></div>
