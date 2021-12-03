@@ -3,15 +3,19 @@
     <head th:replace ="fragments/head::head"></head>
     <body>
         <div th:replace ="fragments/navigator::nav"></div>
-        <div class="wrapper">
-            <main class="container" style="margin-top: 100px;">
+            <main class="container" style="margin-top: 50px; min-height: 100%;">
+                <div id = "restriction-alert" class="alert alert-danger" role="alert">
+                    <strong>No Restriction Selected! </strong> You should check that field below.
+                </div>
+                
                 <div class="d-flex justify-content-center">
                     <h1 class="display-3 text-center" style="margin-right: 20px;">Restaurant Search</h1> 
                     <img th:src="@{images/search-res.png}" width="80px"/>
                 </div>
+
                 <section id = "filter-options">
                     <form id = "search" class="needs-validation" novalidate th:action="@{/getRestaurants}" method="get">
-                        <div class="row justify-content-center">
+                        <div id = "search-row" class="row justify-content-center">
                             <div class="col-md-5" >
                                 <input id = "autocomplete" class="form-control me-2" type="search" name="location" placeholder='Enter street address or zip code' aria-label="Search" required>
                                 <input id = "coordsLat" type="hidden" name="lat">
@@ -24,6 +28,41 @@
                                     Invalid Location
                                 </div>
                             </div>
+
+                            <div class="dropdown col-auto">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Restriction
+                                </button>
+
+                                <ul id = "form-search-restrictions" class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
+                                    <li><h6 class="dropdown-header">Allergens</h6></li>
+                                    <div th:if="!${#lists.isEmpty(allergens)}">
+                                        <span th:each="all:${allergens}" class="restriction-input">
+                                            <input type="radio" name="restriction" th:value="${all.getAllergen()}" style="display:none"/>
+                                            <li><a class="dropdown-item" href="#" th:text="${all.getAllergen()}"></a></li>
+                                        </span> 
+                                    </div>
+                                    <div th:if="${#lists.isEmpty(allergens)}">
+                                        You don't have any Allergens
+                                    </div>
+
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><h6 class="dropdown-header">Dietary Restrictions</h6></li>
+
+                                    <div  th:if="!${#lists.isEmpty(restrictions)}">
+                                        <span  th:each="res:${restrictions}" class="restriction-input">
+                                            <input type="radio" name="restriction" th:value="${res.getDietaryRestriction()}" style="display:none"/>
+                                            <li><a class="dropdown-item" href="#" th:text="${res.getDietaryRestriction()}"></a></li>
+                                        </span>  
+                                    </div>
+                                    <div th:if="${#lists.isEmpty(restrictions)}">
+                                        You don't have any restrictions
+                                    </div>
+                                    
+                                </ul>
+                            </div>
+                            
+                            
                             <div class="col-auto">
                                 <button class="btn btn-outline-success" type="submit">Find Restaurants</button>
                             </div>
@@ -42,12 +81,12 @@
                     <div th:replace ="fragments/loading::loading"></div>
                 </div>
             </main>
-        </div>
         <div th:replace ="fragments/footer::footer"></div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6xVGUQHl1qnE0KaRLDFgveoSzS6dJ_pg&libraries=places"></script>
         <script type="text/javascript" th:src="@{js/maps.js}"></script>
         <script type="text/javascript" th:src="@{js/search.js}"></script>
         <script type="text/javascript" th:src="@{js/validation-loader.js}"></script>
         <script type="text/javascript" th:src="@{js/autocomplete.js}"></script>
+        <script type="text/javascript" th:src="@{js/restrictionSelect.js}"></script>
     </body>
 </html>

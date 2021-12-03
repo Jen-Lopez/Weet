@@ -23,6 +23,9 @@
                             </div>
                          </td>                    
                      </tr>
+                     <tr th:if="${#lists.isEmpty(allergens)}">
+                         <td class="text-center">No Allergens Available</td>
+                     </tr>
                      
                 </tbody>
             

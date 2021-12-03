@@ -25,6 +25,11 @@ public class OpenMenuService {
     private Map<String, Float> coordinates = new HashMap<>();
     private Map<String, Object> locationDetails = new HashMap<>();
     private Map<String, Restaurant> restaurants = new HashMap<>();
+    private String search;
+
+    public void setSearch(String query) {
+        this.search = query.toLowerCase().replace(" ", "%20");
+    }
 
     public void setLocationDetails(String key, Object value) { 
         this.locationDetails.put(key, value);
@@ -53,7 +58,7 @@ public class OpenMenuService {
     public void fetchRestaurantsWrapper() {
         try {
             restaurants.clear();
-            searchRestaurants("vegan", (String)locationDetails.getOrDefault("city", ""), (String)locationDetails.getOrDefault("state", ""), (String)locationDetails.getOrDefault("zip", ""));
+            searchRestaurants(search, (String)locationDetails.getOrDefault("city", ""), (String)locationDetails.getOrDefault("state", ""), (String)locationDetails.getOrDefault("zip", ""));
             locationDetails.clear();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -168,8 +173,11 @@ public class OpenMenuService {
         newRestaurant.setMenu(menu);
 
         YelpInfo data = yelpService.fetchReviewsWrapper(newRestaurant.getRestName().replace(" ", "%20"), newRestaurant.getLat(), newRestaurant.getLong());
-        if ((data.getRestName().toLowerCase()).contains((newRestaurant.getRestName()).toLowerCase())) {
-            newRestaurant.setYelpData(data);
+
+        if (data.getRestName() != null) {
+            if ((data.getRestName().toLowerCase()).contains((newRestaurant.getRestName()).toLowerCase())) {
+                newRestaurant.setYelpData(data);
+            }
         }
 
         return newRestaurant;

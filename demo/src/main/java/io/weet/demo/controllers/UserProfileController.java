@@ -1,12 +1,18 @@
 package io.weet.demo.controllers;
 import io.weet.demo.models.Allergen;
 import io.weet.demo.models.DietaryRestriction;
+import io.weet.demo.models.UserModel;
+import io.weet.demo.services.UserService;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,21 +22,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 
 public class UserProfileController {
+    Authentication authentication;
+    private UserModel user; 
+
     private Map<String, Allergen> allergenList = new HashMap<>();
     private Map<String, DietaryRestriction> dietaryRestrictionList = new HashMap<>();
 
-    // fetch this from DB
+    @Autowired
+    UserService userService;
+    
     @PostConstruct
     private void loadData(){
-        DietaryRestriction ex1 = new DietaryRestriction("Vegan");
-        dietaryRestrictionList.put(ex1.getDietaryRestriction(), ex1);
     }
 
     @GetMapping("/user")
     public String userProfile(Model model) {
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        user = userService.getUser(authentication.getName());
+
         model.addAttribute("allergenList", new ArrayList<>(allergenList.values()));
         model.addAttribute("dietaryRestrictionList", new ArrayList<>(dietaryRestrictionList.values()));
-
+        model.addAttribute("userName", user.getName());
         return "userProfile";
     }
     

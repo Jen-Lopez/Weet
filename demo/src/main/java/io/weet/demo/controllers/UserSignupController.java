@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import io.weet.demo.models.Allergen;
+import io.weet.demo.models.DietaryRestriction;
 import io.weet.demo.models.UserModel;
 import io.weet.demo.services.UserService;
 
@@ -25,7 +26,7 @@ public class UserSignupController {
 
     @PostMapping("/createUser")
     public String createUser(@RequestParam(name = "name") String name, @RequestParam(name = "email") String email, @RequestParam(name = "password") String pwd) {
-        userService.saveUser(new UserModel(name, email, pwd, new ArrayList<Allergen>()));
+        userService.saveUser(new UserModel(name, email, pwd, new ArrayList<Allergen>(), new ArrayList<DietaryRestriction>()));
         return "redirect:/signup?success";
     }
 
