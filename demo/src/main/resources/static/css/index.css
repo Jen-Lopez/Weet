@@ -8,11 +8,8 @@ html,body {
     height: 100%;
 }
 
-.wrapper {
+main {
     min-height: 100%;
-}
-.wrapper main {
-    overflow: auto;
 }
 
 #main-logo-heading {
@@ -301,6 +298,9 @@ footer {
 
     #search {
         margin-top: 0px;
+    }
+    #menuListContainer {
+        flex-direction: column;
     }
 }
 

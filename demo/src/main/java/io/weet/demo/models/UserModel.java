@@ -13,13 +13,14 @@ public class UserModel {
     private String email;
     private String password;
     private List<Allergen> allergens;
-    private boolean add;
+    private List<DietaryRestriction> restrictions;
 
-    public UserModel(String name, String email, String password, List<Allergen> allergens) {
+    public UserModel(String name, String email, String password, List<Allergen> allergens, List<DietaryRestriction> restrictions) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.allergens = allergens;
+        this.restrictions = restrictions;
     }
 
     public String getName() {
@@ -29,7 +30,6 @@ public class UserModel {
     public void setName(String name){
         this.name = name;
     }
-
 
     public String getEmail() {
         return email;
@@ -47,14 +47,18 @@ public class UserModel {
         return allergens;
     }
 
+    public List<DietaryRestriction> getRestrictions(){
+        return restrictions;
+    }
+
     public void setPassword(String pwd) {
         this.password = pwd;
     }
 
-    public void addAllergy(String name){
-        Allergen alg = new Allergen(name);
-        add = allergens.add(alg); //adds allergy to allergy list with name specified in method signature
-    }
+    // public void addAllergy(String name){
+    //     Allergen alg = new Allergen(name);
+    //     add = allergens.add(alg); //adds allergy to allergy list with name specified in method signature
+    // }
 
     public void deleteAllergy(String name){
         for (int i = 0; i < allergens.size(); i++){

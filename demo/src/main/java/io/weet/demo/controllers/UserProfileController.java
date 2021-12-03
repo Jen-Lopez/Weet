@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class UserProfileController {
     Authentication authentication;
+    private UserModel user; 
 
     private Map<String, Allergen> allergenList = new HashMap<>();
     private Map<String, DietaryRestriction> dietaryRestrictionList = new HashMap<>();
-    private UserModel user; 
 
     @Autowired
     UserService userService;
@@ -39,11 +39,10 @@ public class UserProfileController {
     public String userProfile(Model model) {
         authentication = SecurityContextHolder.getContext().getAuthentication();
         user = userService.getUser(authentication.getName());
-        // System.out.println(user);
 
         model.addAttribute("allergenList", new ArrayList<>(allergenList.values()));
         model.addAttribute("dietaryRestrictionList", new ArrayList<>(dietaryRestrictionList.values()));
-
+        model.addAttribute("userName", user.getName());
         return "userProfile";
     }
     

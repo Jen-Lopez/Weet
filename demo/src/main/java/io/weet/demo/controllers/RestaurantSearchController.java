@@ -1,15 +1,16 @@
 package io.weet.demo.controllers;
 
-import io.weet.demo.models.Allergen;
 import io.weet.demo.models.Restaurant;
+import io.weet.demo.models.UserModel;
 import io.weet.demo.services.OpenMenuService;
+import io.weet.demo.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,27 +18,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class RestaurantSearchController {
+    
+    Authentication authentication;
+    private UserModel user; 
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     OpenMenuService openMenuService;
 
     boolean madeFirstSearch;
 
-    ArrayList<Allergen> allergens;
-    ArrayList<Allergen> restrictions;
-
-    @PostConstruct
-    public void loadRestrictions() {
-
-    }
-
     @GetMapping("/search")
     public String RestaurantSearch(Model model) {
         List<Restaurant> results = new ArrayList<>(openMenuService.getResults().values());
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        user = userService.getUser(authentication.getName());
+
         model.addAttribute("results", results);
         model.addAttribute("processed", madeFirstSearch);
-        model.addAttribute("allergens", allergens);
-        model.addAttribute("restrictions", restrictions);
+        model.addAttribute("allergens", user.getAllergies());
+        model.addAttribute("restrictions", user.getRestrictions());
         return "restaurantSearch";
     }
 

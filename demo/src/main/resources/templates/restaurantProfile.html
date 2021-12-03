@@ -3,7 +3,6 @@
     <head th:replace ="fragments/head::head"></head>
     <body>
         <div th:replace ="fragments/navigator::nav"></div>
-        <div class="wrapper">
           <main class="container" th:if="${restaurant == null}">
               <h1 class="text-center" style="margin-top: 100px;">Unable to render restaurant details</h1>
               <p class="lead text-center">Go back to <a href="/search" class="green-link">search</a></p>
@@ -95,7 +94,6 @@
               </div>
 
           </main>
-        </div>
         <div th:replace ="fragments/footer::footer"></div>
         <script type="text/javascript" th:src="@{js/details.js}"></script>
     </body>

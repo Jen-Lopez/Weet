@@ -7,15 +7,10 @@
       // Loop over them and prevent submission
       var validation = Array.prototype.filter.call(forms, function(form) {
         form.addEventListener('submit', function(event) {
+          let choice;
           const dropdown = document.getElementById("form-search-restrictions");
-
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          
           if(dropdown) {
-            let choice = dropdown.querySelector("input[name = 'restriction']:checked");
+            choice = dropdown.querySelector("input[name = 'restriction']:checked");
             
             if (!choice) {
               event.preventDefault();
@@ -27,12 +22,17 @@
                 alert.classList.remove("showAlert");
               }, 2200);
 
-              return;
             }
           }
 
-          loader();
-          
+          if (form.checkValidity() === false || !choice) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          else {
+            loader();
+          }
+
           form.classList.add('was-validated');
         }, false);
       });

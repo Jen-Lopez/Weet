@@ -8,7 +8,6 @@
               <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
             </symbol>
         </svg>
-        <div class="wrapper">
             <main sec:authorize="isAuthenticated()" class="container" style="margin-top: 100px;">
                 <h1 class="display-3 text-center">You are Logged In</h1>
                 <div class="text-center" style="height: 200px; margin-top: 60px;">
@@ -70,7 +69,6 @@
                     <p class="text-center"> Already have an account? <a class="green-link" href="/login">Login</a></p>
                 </section>
             </main>
-        </div>
         <div th:replace ="fragments/footer::footer"></div>
         <script type="text/javascript" th:src="@{js/validation.js}"></script>
     </body>
