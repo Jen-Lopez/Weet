@@ -55,10 +55,10 @@ public class UserModel {
         this.password = pwd;
     }
 
-    // public void addAllergy(String name){
-    //     Allergen alg = new Allergen(name);
-    //     add = allergens.add(alg); //adds allergy to allergy list with name specified in method signature
-    // }
+    public void addAllergy(String name){
+        Allergen alg = new Allergen(name);
+        allergens.add(alg); //adds allergy to allergy list with name specified in method signature
+    }
 
     public void deleteAllergy(String name){
         for (int i = 0; i < allergens.size(); i++){
