@@ -30,16 +30,12 @@ public class UserProfileController {
 
     @Autowired
     UserService userService;
-    
-    @PostConstruct
-    private void loadData(){
-    }
 
     @GetMapping("/user")
     public String userProfile(Model model) {
         authentication = SecurityContextHolder.getContext().getAuthentication();
         user = userService.getUser(authentication.getName());
-        // System.out.println(user);
+        loadUserData(user);
 
         model.addAttribute("allergenList", new ArrayList<>(allergenList.values()));
         model.addAttribute("dietaryRestrictionList", new ArrayList<>(dietaryRestrictionList.values()));
@@ -77,5 +73,15 @@ public class UserProfileController {
         dietaryRestrictionList.put(name, new DietaryRestriction(name));
         userService.updateDietaryRestrictions(user, new ArrayList<>(dietaryRestrictionList.values()));
         return "redirect:/user";   
+    }
+
+    public void loadUserData(UserModel user) {
+        for (Allergen all : user.getAllergies()) {
+            allergenList.put(all.getAllergen(), all);
+        }
+
+        for (DietaryRestriction dr : user.getRestrictions()) {
+            dietaryRestrictionList.put(dr.getDietaryRestriction(), dr);
+        }
     }
 }
