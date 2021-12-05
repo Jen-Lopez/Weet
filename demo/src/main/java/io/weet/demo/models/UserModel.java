@@ -75,6 +75,10 @@ public class UserModel {
         this.allergens = al;
     }
 
+    public void setDiet(ArrayList<DietaryRestriction> diet){
+        this.restrictions = diet;
+    }
+
     public String toString() {
         return String.format(
                 "User[id=%s, fullname='%s', email='%s']",

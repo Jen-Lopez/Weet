@@ -72,6 +72,8 @@ public class UserProfileController {
     public String dietaryRestrictionDelete(@RequestParam(name = "name") String name) {
         if (dietaryRestrictionList.containsKey(name)) {
             dietaryRestrictionList.remove(name);
+            ArrayList<DietaryRestriction> d = new ArrayList<>(dietaryRestrictionList.values());
+            userService.updateDiet(user, d);
         }
         return "redirect:/user";   
     }
@@ -79,6 +81,8 @@ public class UserProfileController {
     @PostMapping("/addDietaryRestriction")
     public String addDietaryRestriction(@RequestParam(name = "name") String name) {
         dietaryRestrictionList.put(name, new DietaryRestriction(name));
+        ArrayList<DietaryRestriction> d = new ArrayList<>(dietaryRestrictionList.values());
+        userService.updateDiet(user, d);
         return "redirect:/user";   
     }
 }

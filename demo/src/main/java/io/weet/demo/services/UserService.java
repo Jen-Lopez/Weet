@@ -58,6 +58,12 @@ public class UserService implements UserServiceInterface {
         return user;
     }
 
+    public UserModel updateDietaryRestrictions(UserModel user, ArrayList<DietaryRestriction> dietaryRestrictions){
+        user.setDiet(dietaryRestrictions);
+        userRepository.save(user);
+        return user;
+    }
+
     
 
 }
