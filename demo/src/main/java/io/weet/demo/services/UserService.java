@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import io.weet.demo.models.Allergen;
+import io.weet.demo.models.DietaryRestriction;
 import io.weet.demo.models.UserModel;
 import io.weet.demo.repositories.UserRepository;
 
@@ -47,6 +49,18 @@ public class UserService implements UserServiceInterface {
         }
         authorities.add(new SimpleGrantedAuthority("USER"));
         return new User(user.getEmail(), user.getPassword(), authorities);
+    }
+
+    public UserModel updateAllergens(UserModel user, ArrayList<Allergen> allergens){
+        user.setAllergens(allergens);
+        userRepository.save(user);
+        return user;
+    }
+
+    public UserModel updateDietaryRestrictions(UserModel user, ArrayList<DietaryRestriction> dietaryRestrictions){
+        user.setDiet(dietaryRestrictions);
+        userRepository.save(user);
+        return user;
     }
 
 }

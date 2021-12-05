@@ -10,6 +10,8 @@ public interface UserRepository extends MongoRepository<UserModel, String> {
 
     public UserModel findByEmail(String email);
     // public void addAllergies(User user, Allergen allergen);
+        
+    
 
     //public UserModel addAllergies(String name);
     //public UserModel deleteAllergies(String name);

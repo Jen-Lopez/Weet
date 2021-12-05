@@ -1,4 +1,5 @@
 package io.weet.demo.models;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -54,23 +55,13 @@ public class UserModel {
     public void setPassword(String pwd) {
         this.password = pwd;
     }
-
-    // public void addAllergy(String name){
-    //     Allergen alg = new Allergen(name);
-    //     add = allergens.add(alg); //adds allergy to allergy list with name specified in method signature
-    // }
-
-    public void deleteAllergy(String name){
-        for (int i = 0; i < allergens.size(); i++){
-            if (allergens.get(i).getAllergen().equalsIgnoreCase(name)){
-                allergens.remove(i); //just remove the allergy from Alelrgy list with the name specified in the method signature
-                break;
-            }
-        }
+    
+    public void setAllergens(ArrayList<Allergen> al){
+        this.allergens = al;
     }
 
-    public void setAllergens(List<Allergen> al){
-        allergens = al;
+    public void setDiet(ArrayList<DietaryRestriction> diet){
+        this.restrictions = diet;
     }
 
     public String toString() {

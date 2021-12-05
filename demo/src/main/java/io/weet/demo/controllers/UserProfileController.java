@@ -23,10 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class UserProfileController {
     Authentication authentication;
-    private UserModel user; 
 
     private Map<String, Allergen> allergenList = new HashMap<>();
     private Map<String, DietaryRestriction> dietaryRestrictionList = new HashMap<>();
+    private UserModel user; 
 
     @Autowired
     UserService userService;
@@ -39,6 +39,7 @@ public class UserProfileController {
     public String userProfile(Model model) {
         authentication = SecurityContextHolder.getContext().getAuthentication();
         user = userService.getUser(authentication.getName());
+        // System.out.println(user);
 
         model.addAttribute("allergenList", new ArrayList<>(allergenList.values()));
         model.addAttribute("dietaryRestrictionList", new ArrayList<>(dietaryRestrictionList.values()));
@@ -50,6 +51,7 @@ public class UserProfileController {
     public String allergenDelete(@RequestParam(name = "name") String name) {
         if (allergenList.containsKey(name)) {
             allergenList.remove(name);
+            userService.updateAllergens(user, new ArrayList<>(allergenList.values()));
         }
         return "redirect:/user";   
     }
@@ -57,12 +59,15 @@ public class UserProfileController {
     @PostMapping("/addAllergen")
     public String addAllergen(@RequestParam(name = "name") String name) {
         allergenList.put(name, new Allergen(name));
-        return "redirect:/user";   
+        userService.updateAllergens(user, new ArrayList<>(allergenList.values()));
+        return "redirect:/user";
     }
+
     @PostMapping("/dietaryRestrictionDelete")
     public String dietaryRestrictionDelete(@RequestParam(name = "name") String name) {
         if (dietaryRestrictionList.containsKey(name)) {
             dietaryRestrictionList.remove(name);
+            userService.updateDietaryRestrictions(user, new ArrayList<>(dietaryRestrictionList.values()));
         }
         return "redirect:/user";   
     }
@@ -70,6 +75,7 @@ public class UserProfileController {
     @PostMapping("/addDietaryRestriction")
     public String addDietaryRestriction(@RequestParam(name = "name") String name) {
         dietaryRestrictionList.put(name, new DietaryRestriction(name));
+        userService.updateDietaryRestrictions(user, new ArrayList<>(dietaryRestrictionList.values()));
         return "redirect:/user";   
     }
 }
