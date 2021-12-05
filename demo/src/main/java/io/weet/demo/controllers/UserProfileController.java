@@ -13,7 +13,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,9 +51,7 @@ public class UserProfileController {
     public String allergenDelete(@RequestParam(name = "name") String name) {
         if (allergenList.containsKey(name)) {
             allergenList.remove(name);
-            ArrayList<Allergen> al = new ArrayList<>(allergenList.values());
-            userService.updateAllergens(user, al);
-            //userService.deleteAllergen(user.getEmail(), name);
+            userService.updateAllergens(user, new ArrayList<>(allergenList.values()));
         }
         return "redirect:/user";   
     }
@@ -62,18 +59,15 @@ public class UserProfileController {
     @PostMapping("/addAllergen")
     public String addAllergen(@RequestParam(name = "name") String name) {
         allergenList.put(name, new Allergen(name));
-        //userService.addAllergen(user.getEmail(), name);
-        ArrayList<Allergen> al = new ArrayList<>(allergenList.values());
-        userService.updateAllergens(user, al);
-        return "redirect:/user";   
+        userService.updateAllergens(user, new ArrayList<>(allergenList.values()));
+        return "redirect:/user";
     }
 
     @PostMapping("/dietaryRestrictionDelete")
     public String dietaryRestrictionDelete(@RequestParam(name = "name") String name) {
         if (dietaryRestrictionList.containsKey(name)) {
             dietaryRestrictionList.remove(name);
-            ArrayList<DietaryRestriction> d = new ArrayList<>(dietaryRestrictionList.values());
-            userService.updateDiet(user, d);
+            userService.updateDietaryRestrictions(user, new ArrayList<>(dietaryRestrictionList.values()));
         }
         return "redirect:/user";   
     }
@@ -81,8 +75,7 @@ public class UserProfileController {
     @PostMapping("/addDietaryRestriction")
     public String addDietaryRestriction(@RequestParam(name = "name") String name) {
         dietaryRestrictionList.put(name, new DietaryRestriction(name));
-        ArrayList<DietaryRestriction> d = new ArrayList<>(dietaryRestrictionList.values());
-        userService.updateDiet(user, d);
+        userService.updateDietaryRestrictions(user, new ArrayList<>(dietaryRestrictionList.values()));
         return "redirect:/user";   
     }
 }

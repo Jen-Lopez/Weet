@@ -56,21 +56,6 @@ public class UserModel {
         this.password = pwd;
     }
     
-    /*
-    public void addAllergy(String name){
-        Allergen alg = new Allergen(name);
-        allergens.add(alg); 
-    }
-
-    public void deleteAllergy(String name){
-        for (int i = 0; i < allergens.size(); i++){
-            if (allergens.get(i).getAllergen().equalsIgnoreCase(name)){
-                allergens.remove(i); //just remove the allergy from Alelrgy list with the name specified in the method signature
-                break;
-            }
-        }
-    } */
-
     public void setAllergens(ArrayList<Allergen> al){
         this.allergens = al;
     }
