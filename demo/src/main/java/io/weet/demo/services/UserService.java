@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import io.weet.demo.models.Allergen;
 import io.weet.demo.models.UserModel;
 import io.weet.demo.repositories.UserRepository;
 
@@ -49,30 +50,14 @@ public class UserService implements UserServiceInterface {
         return new User(user.getEmail(), user.getPassword(), authorities);
     }
 
-    //add allergen and updates it to the user object in the database
+    //updates allergens to the user object in the database
 
-    public UserModel addAllergen(String email, String allergenName){
-
-        UserModel user = userRepository.findByEmail(email); //gets the user in question
-
-        user.addAllergy(allergenName); //updates user's list of allergens by adding it
+    public UserModel updateAllergens(UserModel user, ArrayList<Allergen> allergens){
+        user.setAllergens(allergens);
         userRepository.save(user);
-
         return user;
-
     }
 
-    public UserModel deleteAllergen(String email, String allergenName){
-        
-        UserModel user = userRepository.findByEmail(email);
-
-        user.deleteAllergy(allergenName);
-        userRepository.save(user);
-        
-        return user;
-
-    }
-
-
+    
 
 }
