@@ -59,12 +59,10 @@ public class RestaurantSearchController {
         ArrayList<String> queries;
 
         if (allergenService.keywordDoesExist(query)) {
-            System.out.println("IS AN ALLERGEN");
             queries = allergenService.getKeywords(query);
         }
 
         else {
-            System.out.println("IS A RESTRICTION");
             queries = new ArrayList<>();
             queries.add(query);
         }
