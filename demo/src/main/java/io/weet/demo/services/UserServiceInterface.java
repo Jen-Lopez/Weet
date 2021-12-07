@@ -7,5 +7,4 @@ import io.weet.demo.models.UserModel;
 public interface UserServiceInterface  extends UserDetailsService {
     UserModel saveUser(UserModel user);
     UserModel getUser(String email);
-    // void addAllergies(UserModel user, Allergen allergen);
 }
