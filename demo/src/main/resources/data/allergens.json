@@ -1,0 +1,84 @@
+{
+  "allergens": [
+    {
+      "allergen": "peanuts",
+      "keywords": [
+        "peanut free",
+        "nut free",
+        "no nuts",
+        "nut-free"
+      ]
+    },
+    {
+      "allergen": "milk",
+      "keywords": [
+        "no milk",
+        "milk free",
+        "no dairy",
+        "dairy-free",
+        "non-dairy"
+      ]
+    },
+    {
+      "allergen": "gluten",
+      "keywords": [
+        "wheat free",
+        "gluten free",
+        "no gluten",
+        "gluten-free"
+      ]
+    },
+    {
+      "allergen": "fish",
+      "keywords": [
+        "no fish",
+        "fish free",
+        "fish-free"
+      ]
+    },
+    {
+      "allergen": "eggs",
+      "keywords": [
+        "egg free",
+        "no eggs",
+        "egg-free"
+      ]
+    },
+    {
+      "allergen": "soybeans",
+      "keywords": [
+        "soybean free",
+        "soy free",
+        "no soybeans",
+        "soy-free"
+      ]
+    },
+    {
+      "allergen": "tree nuts",
+      "keywords": [
+        "no tree nuts",
+        "tree nut free",
+        "no nuts",
+        "nut free",
+        "nut-free"
+      ]
+    },
+    {
+      "allergen": "shellfish",
+      "keywords": [
+        "no shellfish",
+        "shellfish free",
+        "fish free",
+        "shellfish-free"
+      ]
+    },
+    {
+      "allergen": "sesame",
+      "keywords": [
+        "no sesame",
+        "sesame free",
+        "sesame-free"
+      ]
+    }
+  ]
+}

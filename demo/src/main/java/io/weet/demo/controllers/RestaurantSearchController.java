@@ -2,11 +2,14 @@ package io.weet.demo.controllers;
 
 import io.weet.demo.models.Restaurant;
 import io.weet.demo.models.UserModel;
+import io.weet.demo.services.AllergenService;
 import io.weet.demo.services.OpenMenuService;
 import io.weet.demo.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -28,7 +31,15 @@ public class RestaurantSearchController {
     @Autowired
     OpenMenuService openMenuService;
 
+    @Autowired
+    AllergenService allergenService;
+
     boolean madeFirstSearch;
+
+    @PostConstruct
+    public void loadAllergens() {
+        allergenService.readAllergens();
+    }
 
     @GetMapping("/search")
     public String RestaurantSearch(Model model) {
@@ -45,7 +56,18 @@ public class RestaurantSearchController {
 
     @GetMapping("/getRestaurants")
     public String RestaurantSearchResults(@RequestParam(name = "city") String city, @RequestParam(name = "state") String state, @RequestParam(name = "nbhood") String nbhood, @RequestParam(name = "zip") String zip, @RequestParam(name = "lat") String latCoords, @RequestParam(name = "long") String longCoords, @RequestParam(name = "restriction") String query) {
-        openMenuService.setSearch(query);
+        ArrayList<String> queries;
+
+        if (allergenService.keywordDoesExist(query)) {
+            queries = allergenService.getKeywords(query);
+        }
+
+        else {
+            queries = new ArrayList<>();
+            queries.add(query);
+        }
+
+        openMenuService.setSearch(queries);
         openMenuService.setCoordinates("lat", Float.parseFloat(latCoords));
         openMenuService.setCoordinates("long", Float.parseFloat(longCoords));
 
