@@ -240,47 +240,47 @@ main {
 }
 
 .restriction-group .peanuts {
-    background-color: rgb(229, 238, 170);
+    background-color: #eef5be;
 }
 
 .restriction-group .dairy {
-    background-color: rgb(170, 195, 238);
+    background-color: #c9d8f1;
 }
 
 .restriction-group .gluten {
-    background-color: rgb(238, 170, 230);
+    background-color: #00968863;
 }
 
 .restriction-group .fish {
-    background-color: rgb(238, 170, 188);
+    background-color: #ffb8b3b5;
 }
 
 .restriction-group .eggs {
-    background-color: rgb(170, 237, 238);
+    background-color: #c6eeef;
 }
 
 .restriction-group .soy {
-    background-color: rgb(170, 238, 189);
+    background-color: #d0f9dc;
 }
 
 .restriction-group .tree {
-    background-color: rgb(232, 170, 238);
+    background-color: #f4d2f7;
 }
 
 .restriction-group .shell {
-    background-color: rgb(238, 170, 188);
+    background-color: #f5e1e6;
 }
 
 .restriction-group .sesame {
-    background-color: rgb(238, 170, 170);
+    background-color: #f7c5c5;
 }
 
 .restriction-group .vegan {
-    background-color: rgb(238, 202, 170);
+    background-color: #f9e9db;
 }
 
 .restriction-group .veg {
-    background-color: rgb(185, 170, 238);
+    background-color: #e4defb;
 }
 
 /* LOGIN */
