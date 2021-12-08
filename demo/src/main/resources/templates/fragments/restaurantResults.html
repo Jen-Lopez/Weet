@@ -16,10 +16,28 @@
                                     <h5 class="card-title" th:text="${rest.getRestName()}"></h5>
                                     <span class="card-text"><small class="text-muted" th:text="${rest.getRestAddress()}"></small></span><br/>
                                     <span class="card-text"><small class="text-muted" th:text="${rest.getCity() + ', ' + rest.getState() + ' ' + rest.getZip()} "></small></span>
+                                    <div class="restriction-group">
+                                        <span class="card-text restriction-text"><small class="text-muted">Restrictions:</small></span>
+                                        <div th:each="labelName:${rest.getLabels()}" style="display: inline-block;">
+                                            <span th:if="${labelName == 'Peanuts'}" class="restriction-label peanuts"  th:text="${labelName}"></span>
+                                            <span th:if="${labelName == 'Dairy'}" class="restriction-label dairy"  th:text="${labelName}"></span>
+                                            <span th:if="${labelName == 'Gluten'}" class="restriction-label gluten"  th:text="${labelName}"></span>
+                                            <span th:if="${labelName == 'Fish'}" class="restriction-label fish"  th:text="${labelName}"></span>
+                                            <span th:if="${labelName == 'Eggs'}" class="restriction-label eggs"  th:text="${labelName}"></span>
+                                            <span th:if="${labelName == 'Soybeans'}" class="restriction-label soy"  th:text="${labelName}"></span>
+                                            <span th:if="${labelName == 'Tree Nuts'}" class="restriction-label tree"  th:text="${labelName}"></span>
+                                            <span th:if="${labelName == 'Shellfish'}" class="restriction-label shell"  th:text="${labelName}"></span>
+                                            <span th:if="${labelName == 'Sesame'}" class="restriction-label sesame"  th:text="${labelName}"></span>
+
+                                            <span th:if="${labelName == 'Vegan'}" class="restriction-label vegan"  th:text="${labelName}"></span>
+                                            <span th:if="${labelName == 'Vegetarian'}" class="restriction-label veg"  th:text="${labelName}"></span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="display-dish-count">
                                     <span th:text="${#lists.size(rest.getUserItems())}"></span>
                                 </div>
+
                             </div>
                         </div>
                     </div>

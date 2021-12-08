@@ -28,40 +28,6 @@
                                     Invalid Location
                                 </div>
                             </div>
-
-                            <div class="dropdown col-auto">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Restriction
-                                </button>
-
-                                <ul id = "form-search-restrictions" class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton1">
-                                    <li><h6 class="dropdown-header">Allergens</h6></li>
-                                    <div th:if="!${#lists.isEmpty(allergens)}">
-                                        <span th:each="all:${allergens}" class="restriction-input">
-                                            <input type="radio" name="restriction" th:value="${all.getAllergen()}" style="display:none"/>
-                                            <li><a class="dropdown-item" href="#" th:text="${all.getAllergen()}"></a></li>
-                                        </span> 
-                                    </div>
-                                    <div th:if="${#lists.isEmpty(allergens)}">
-                                        You don't have any Allergens
-                                    </div>
-
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><h6 class="dropdown-header">Dietary Restrictions</h6></li>
-
-                                    <div  th:if="!${#lists.isEmpty(restrictions)}">
-                                        <span  th:each="res:${restrictions}" class="restriction-input">
-                                            <input type="radio" name="restriction" th:value="${res.getDietaryRestriction()}" style="display:none"/>
-                                            <li><a class="dropdown-item" href="#" th:text="${res.getDietaryRestriction()}"></a></li>
-                                        </span>  
-                                    </div>
-                                    <div th:if="${#lists.isEmpty(restrictions)}">
-                                        You don't have any restrictions
-                                    </div>
-                                    
-                                </ul>
-                            </div>
-                            
                             
                             <div class="col-auto">
                                 <button class="btn btn-outline-success" type="submit">Find Restaurants</button>

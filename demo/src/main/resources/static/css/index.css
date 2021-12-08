@@ -124,6 +124,10 @@ main {
     margin-top: 5px;
 }
 
+#spinner-img {
+    width: 60%;
+}
+
 #restDetails {
     margin-top: 50px;
 }
@@ -223,6 +227,62 @@ main {
     text-decoration: none;
 }
 
+.restriction-group {
+    margin-top: 15px;
+}
+
+.restriction-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.restriction-group .peanuts {
+    background-color: rgb(229, 238, 170);
+}
+
+.restriction-group .dairy {
+    background-color: rgb(170, 195, 238);
+}
+
+.restriction-group .gluten {
+    background-color: rgb(238, 170, 230);
+}
+
+.restriction-group .fish {
+    background-color: rgb(238, 170, 188);
+}
+
+.restriction-group .eggs {
+    background-color: rgb(170, 237, 238);
+}
+
+.restriction-group .soy {
+    background-color: rgb(170, 238, 189);
+}
+
+.restriction-group .tree {
+    background-color: rgb(232, 170, 238);
+}
+
+.restriction-group .shell {
+    background-color: rgb(238, 170, 188);
+}
+
+.restriction-group .sesame {
+    background-color: rgb(238, 170, 170);
+}
+
+.restriction-group .vegan {
+    background-color: rgb(238, 202, 170);
+}
+
+.restriction-group .veg {
+    background-color: rgb(185, 170, 238);
+}
+
 /* LOGIN */
 #account-form {
     margin: 100px 0;
@@ -310,7 +370,12 @@ footer {
     }
 
     #main-logo-card {
-        width: 100%;
+        width: 100% !important;
+        margin-top: 50px;
+    }
+
+    #main-logo-heading {
+        margin-top: 50px;
     }
 
     #main-card-tagline {
@@ -319,6 +384,10 @@ footer {
 
     #restDetails  {
         flex-direction: column-reverse;
+    }
+
+    #spinner-img {
+        width: 100%;
     }
 
 }

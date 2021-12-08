@@ -1,5 +1,7 @@
 package io.weet.demo.controllers;
 
+import io.weet.demo.models.Allergen;
+import io.weet.demo.models.DietaryRestriction;
 import io.weet.demo.models.Restaurant;
 import io.weet.demo.models.UserModel;
 import io.weet.demo.services.AllergenService;
@@ -44,30 +46,29 @@ public class RestaurantSearchController {
     @GetMapping("/search")
     public String RestaurantSearch(Model model) {
         List<Restaurant> results = new ArrayList<>(openMenuService.getResults().values());
-        authentication = SecurityContextHolder.getContext().getAuthentication();
-        user = userService.getUser(authentication.getName());
-
         model.addAttribute("results", results);
         model.addAttribute("processed", madeFirstSearch);
-        model.addAttribute("allergens", user.getAllergies());
-        model.addAttribute("restrictions", user.getRestrictions());
         return "restaurantSearch";
     }
 
     @GetMapping("/getRestaurants")
-    public String RestaurantSearchResults(@RequestParam(name = "city") String city, @RequestParam(name = "state") String state, @RequestParam(name = "nbhood") String nbhood, @RequestParam(name = "zip") String zip, @RequestParam(name = "lat") String latCoords, @RequestParam(name = "long") String longCoords, @RequestParam(name = "restriction") String query) {
-        ArrayList<String> queries;
+    public String RestaurantSearchResults(@RequestParam(name = "city") String city, @RequestParam(name = "state") String state, @RequestParam(name = "nbhood") String nbhood, @RequestParam(name = "zip") String zip, @RequestParam(name = "lat") String latCoords, @RequestParam(name = "long") String longCoords) {
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        user = userService.getUser(authentication.getName());
 
-        if (allergenService.keywordDoesExist(query)) {
-            queries = allergenService.getKeywords(query);
+        List<Allergen> allergens = user.getAllergies();
+        List<DietaryRestriction> restrictions = user.getRestrictions();
+        
+        openMenuService.clearQueries();
+
+        for (Allergen allergen : allergens) {
+            openMenuService.addQueries(allergen.getAllergen(), allergenService.getKeywords(allergen.getAllergen()));
         }
 
-        else {
-            queries = new ArrayList<>();
-            queries.add(query);
+        for (DietaryRestriction restriction : restrictions) {
+            openMenuService.addQueries(restriction.getDietaryRestriction(), null);
         }
 
-        openMenuService.setSearch(queries);
         openMenuService.setCoordinates("lat", Float.parseFloat(latCoords));
         openMenuService.setCoordinates("long", Float.parseFloat(longCoords));
 
@@ -83,8 +84,8 @@ public class RestaurantSearchController {
             openMenuService.setLocationDetails("city", nbhood.replace(" ", "%20"));
         }
         openMenuService.setLocationDetails("state", state);
-
         openMenuService.fetchRestaurantsWrapper();
+
         madeFirstSearch = true;
         return "redirect:/search";
     }

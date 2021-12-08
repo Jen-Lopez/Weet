@@ -2,7 +2,7 @@ const input = document.getElementById("allergen-search");
 const resultsContainer = document.getElementById("results");
 const saveButton = document.getElementById("save-allergen");
 
-const allergens = ['Peanuts', 'Milk', 'Gluten', 'Fish', 'Eggs', 'Tree Nuts', 'Shellfish', 'Soybeans', 'Sesame'];
+const allergens = ['Peanuts', 'Dairy', 'Gluten', 'Fish', 'Eggs', 'Tree Nuts', 'Shellfish', 'Soybeans', 'Sesame'];
 
 input.addEventListener("input", (e) => {
     let suggestions = [];

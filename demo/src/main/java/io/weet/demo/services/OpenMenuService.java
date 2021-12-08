@@ -25,12 +25,17 @@ public class OpenMenuService {
     private Map<String, Float> coordinates = new HashMap<>();
     private Map<String, Object> locationDetails = new HashMap<>();
     private Map<String, Restaurant> restaurants = new HashMap<>();
-    private ArrayList<String> search;
+    private Map<String, ArrayList<String>> queries = new HashMap<>();
+    private String searchquery;
 
-    public void setSearch(ArrayList<String> query) {
-        this.search = query;
+    public void addQueries(String restriction, ArrayList<String> keywords) {
+        queries.put(restriction, keywords);
     }
 
+    public void clearQueries() {
+        queries.clear();
+    }
+    
     public void setLocationDetails(String key, Object value) { 
         this.locationDetails.put(key, value);
     }
@@ -55,14 +60,27 @@ public class OpenMenuService {
         return restaurants.get(id);
     }
 
+    public Map<String, ArrayList<String>> getQueries() {
+        return queries;
+    }
+
     public void fetchRestaurantsWrapper() {
         try {
             restaurants.clear();
-            for (String keyword : search) {
-                System.out.println("IN FETCH ... " + keyword);
-                keyword = keyword.toLowerCase().replace(" ", "%20");
-                searchRestaurants(keyword, (String)locationDetails.getOrDefault("city", ""), (String)locationDetails.getOrDefault("state", ""), (String)locationDetails.getOrDefault("zip", ""));
-            }
+            for (String restriction : queries.keySet()) {
+                searchquery = restriction;
+
+                if (queries.get(restriction) != null) {
+                    for (String keyword : queries.get(restriction)) {
+                        keyword = keyword.replace(" ", "%20");
+                        searchRestaurants(keyword, (String)locationDetails.getOrDefault("city", ""), (String)locationDetails.getOrDefault("state", ""), (String)locationDetails.getOrDefault("zip", ""));
+                    }
+                }
+                else {
+                    restriction = restriction.replace(" ", "%20");
+                    searchRestaurants(restriction, (String)locationDetails.getOrDefault("city", ""), (String)locationDetails.getOrDefault("state", ""), (String)locationDetails.getOrDefault("zip", ""));
+                }
+            }   
             locationDetails.clear();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -112,8 +130,8 @@ public class OpenMenuService {
             else {
                 rest = getRestaurantDetails(newDish.getResParentID());
             }
-
             rest.addMenuItemToUser(newDish);
+            rest.addLabel(searchquery);
             restaurants.put(rest.getRestId(), rest);
         }
     }
