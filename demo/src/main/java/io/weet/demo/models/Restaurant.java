@@ -1,6 +1,6 @@
 package io.weet.demo.models;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Restaurant {
     private String id;
@@ -18,9 +18,11 @@ public class Restaurant {
     private YelpInfo yelpData;
     private Menu menu;
     private ArrayList<Dish> userMenuItems;
+    private Map<String, Boolean> labelMap;
 
     public Restaurant() {
         userMenuItems = new ArrayList<>();
+        labelMap = new HashMap<>();
     }
     
     public String getRestId() {
@@ -83,6 +85,10 @@ public class Restaurant {
         return userMenuItems;
     }
 
+    public ArrayList<String> getLabels() {
+        return new ArrayList<String>(labelMap.keySet());
+    }
+
     public void setRestId(String id){
         this.id = id;
     }
@@ -141,6 +147,10 @@ public class Restaurant {
 
     public void addMenuItemToUser(Dish item) {
         userMenuItems.add(item);
+    }
+
+    public void addLabel(String label) {
+        labelMap.put(label, true);
     }
 
     @Override

@@ -10,7 +10,7 @@
       ]
     },
     {
-      "allergen": "milk",
+      "allergen": "dairy",
       "keywords": [
         "no milk",
         "milk free",
@@ -57,10 +57,7 @@
       "allergen": "tree nuts",
       "keywords": [
         "no tree nuts",
-        "tree nut free",
-        "no nuts",
-        "nut free",
-        "nut-free"
+        "tree nut free"
       ]
     },
     {
