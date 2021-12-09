@@ -2,13 +2,9 @@ package io.weet.demo.services;
 
 import java.io.*;
 import java.util.*;
-import java.nio.file.*;
-import java.nio.charset.StandardCharsets;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.json.simple.parser.*;
+import org.json.simple.*;
 
 @Service
 public class AllergenService {
@@ -26,23 +22,28 @@ public class AllergenService {
 
     public void readAllergens() {
         try {
-            String content = Files.readString(Paths.get(new ClassPathResource("data/allergens.json").getURI()), StandardCharsets.US_ASCII);
-            JSONObject root = new JSONObject(content);
-            JSONArray allergens = root.getJSONArray("allergens");
+            InputStream in = getClass().getClassLoader().getResourceAsStream("data/allergens.json");
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(new InputStreamReader(in, "UTF-8"));
 
-            for (int i = 0; i < allergens.length(); i++) {
+            JSONArray allergens = (JSONArray) root.get("allergens");
+
+            for (int i = 0; i < allergens.size(); i++) {
                 ArrayList<String> keywords = new ArrayList<>();
 
-                JSONObject currObj = allergens.getJSONObject(i);
-                String allergen = currObj.getString("allergen");
-                JSONArray keys = currObj.getJSONArray("keywords");
-                for (int j = 0; j < keys.length(); j++) {
-                    keywords.add(keys.getString(j));
+                JSONObject currObj = (JSONObject) allergens.get(i);
+                String allergen = currObj.get("allergen").toString();
+                JSONArray keys = (JSONArray) currObj.get("keywords");
+
+                for (int j = 0; j < keys.size(); j++) {
+                    keywords.add(keys.get(j).toString());
                 }
+
                 allergenKeywords.put(allergen, keywords);
             }
+
         }
-        catch (IOException e) {
+        catch (IOException | ParseException e) {
             System.out.println("Unable to read file.");
         }
 
