@@ -27,16 +27,10 @@ public class UserSettings {
     @Autowired
     UserService userService;
 
-
-    
-    @PostConstruct
-    private void loadData(){
-        authentication = SecurityContextHolder.getContext().getAuthentication();
-        user = userService.getUser(authentication.getName());
-    } 
-
     @GetMapping("/settings")
     public String userProfile(Model model) {
+        authentication = SecurityContextHolder.getContext().getAuthentication();
+        user = userService.getUser(authentication.getName());
         model.addAttribute("name", user.getName());
         return "redirect:/settings";
     }
