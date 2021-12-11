@@ -98,6 +98,7 @@ public class OpenMenuService {
         System.out.println("GETTING RELEVANT RESULTS....");
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
         JSONObject root = new JSONObject(httpResponse.body());
+        System.out.println(httpResponse.body());
 
         JSONObject result = root.getJSONObject("response").getJSONObject("result");
 
