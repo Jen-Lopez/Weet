@@ -8,4 +8,9 @@ public class Home {
     public String Welcome() {
         return "home";
     }
+
+    @GetMapping("/error")
+    public String error() {
+        return "error";
+    }
 }

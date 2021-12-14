@@ -69,15 +69,14 @@ public class OpenMenuService {
             restaurants.clear();
             for (String restriction : queries.keySet()) {
                 searchquery = restriction;
-
                 if (queries.get(restriction) != null) {
                     for (String keyword : queries.get(restriction)) {
-                        keyword = keyword.replace(" ", "%20");
+                        keyword = keyword.toLowerCase().replace(" ", "%20");
                         searchRestaurants(keyword, (String)locationDetails.getOrDefault("city", ""), (String)locationDetails.getOrDefault("state", ""), (String)locationDetails.getOrDefault("zip", ""));
                     }
                 }
                 else {
-                    restriction = restriction.replace(" ", "%20");
+                    restriction = restriction.toLowerCase().replace(" ", "%20");
                     searchRestaurants(restriction, (String)locationDetails.getOrDefault("city", ""), (String)locationDetails.getOrDefault("state", ""), (String)locationDetails.getOrDefault("zip", ""));
                 }
             }   
@@ -95,10 +94,18 @@ public class OpenMenuService {
             .uri(URI.create(SEARCH_ENDPOINT))
             .GET()
             .build();
+
         System.out.println("GETTING RELEVANT RESULTS....");
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-        JSONObject root = new JSONObject(httpResponse.body());
-        System.out.println(httpResponse.body());
+        System.out.println("THE RESPONSE BODY IS " + httpResponse.body());
+        boolean isValidResponse = httpResponse.body().equals("") ? false : true;
+
+        if (!isValidResponse) {
+            System.out.println("Invalid Response.");
+            return;
+        }
+
+        JSONObject root = new JSONObject((httpResponse.body()));
 
         JSONObject result = root.getJSONObject("response").getJSONObject("result");
 
